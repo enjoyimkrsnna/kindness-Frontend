@@ -1,0 +1,36 @@
+name: CI/CD Pipeline
+ 
+on:
+  push:
+    branches:
+      - main  # Adjust branch name as needed
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+ 
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: 52.16.194.174
+          username: ec2_user
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          script: |
+            # Stop existing Node.js server
+            PID=$(sudo lsof -t -i:5501)
+            if [ ! -z "$PID" ]; then
+              sudo kill -9 $PID
+            fi
+            # Remove previous repository
+            rm -rf ShippingWars
+            # Clone new repository
+            git clone https://github.com/enjoyimkrsnna/kindness-Frontend.git
+            # # Install dependencies
+            # cd /home/ec2-user/kindness-Frontend
+            # npm install
+            # Start Node.js server
+            nohup node server.js > output.log 2>&1 &
