@@ -17,7 +17,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: 52.16.194.174
-          username: ec2_user
+          username: ec2-user
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
             # Stop existing Node.js server
