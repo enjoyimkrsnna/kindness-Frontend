@@ -28,7 +28,7 @@ jobs:
             # Remove previous repository
             rm -rf ShippingWars
             # Clone new repository
-            git clone https://github.com/enjoyimkrsnna/kindness-Frontend.git
+            git clone https://github.com/enjoyimkrsnna/kindness-Frontend
             # # Install dependencies
             # cd /home/ec2-user/kindness-Frontend
             # npm install
