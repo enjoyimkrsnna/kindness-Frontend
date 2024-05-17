@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./auth.js"></script>
+</head>
+<body>
+    <button id="loginBtn">Login with Google</button>
+    <button onclick="fetchUserData()">get data</button>
+    <button onclick="SavePost()">Post data</button>
+    <script>
+        document.getElementById('loginBtn').onclick = loadLogin;
+
+        // When landing on the redirectUri, check for the token
+        window.onload = () => {
+            const idToken = parseTokenFromUrl();
+            if (idToken) {
+                fetchUserInfo(idToken);
+            }
+        };
+    </script>
+</body>
+</html>
