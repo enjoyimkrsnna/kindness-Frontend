@@ -1,0 +1,60 @@
+
+
+/* Form container styles */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px; /* Adjust margin-top to position the form */
+}
+
+/* Form styles */
+.form {
+  width: 70%; /* Set the width of the form */
+  max-width: 600px; /* Limit maximum width */
+  background-color: #f5f5f5; /* Set background color */
+  padding: 20px; /* Add padding */
+  border-radius: 10px; /* Add border radius */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+}
+
+/* Form header styles */
+.form-header {
+  text-align: center; /* Align header text to center */
+  margin-bottom: 20px; /* Add bottom margin */
+}
+
+/* Form input styles */
+.form-group {
+  margin-bottom: 20px; /* Add bottom margin to form groups */
+}
+
+.form-group label {
+  display: block; /* Display labels as blocks */
+  margin-bottom: 5px; /* Add bottom margin */
+  font-weight: bold; /* Set label font weight */
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%; /* Set input width to 100% */
+  padding: 10px; /* Add padding */
+  border-radius: 5px; /* Add border radius */
+  border: 1px solid #ccc; /* Add border */
+}
+
+/* Form button styles */
+.form-button {
+  background-color: #0ab666; /* Set button background color */
+  color: #fff; /* Set text color */
+  padding: 10px 20px; /* Add padding */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Add border radius */
+  cursor: pointer; /* Add cursor pointer */
+  transition: background-color 0.3s; /* Add transition */
+}
+
+.form-button:hover {
+  background-color: #0b9c59; /* Change background color on hover */
+}

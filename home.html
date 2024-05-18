@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!--=============== REMIXICONS ===============-->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+
+   <!--=============== CSS ===============-->
+   <link rel="stylesheet" href="assets/css/styles.css">
+   <link rel="stylesheet" href="assets/css/form.css">
+   <link rel="stylesheet" href="assets/css/userprofile.css">
+   <script src="./assets/js/home.js"></script>
+   <script src="./assets/js/userprofile.js"></script>
+   
+   
+
+   <title>Kindnesskettle</title>
+</head>
+<body>
+   <!--==================== HEADER ====================-->
+   <header class="header" id="header">
+      <nav class="nav container">
+         <h4 style="color: aliceblue;" id="userName"> <span> </span></h4>
+
+         <div class="nav__menu" id="nav-menu">
+            <ul class="nav__list">
+               
+               <li class="nav__item">
+                  <a href="#" class="nav__link" onclick="createPost()">
+                     <i class="ri-arrow-right-up-line"></i>
+                     <span>Home</span>
+                  </a>
+               </li>
+
+               <li class="nav__item">
+                  <a href="#" class="nav__link" onclick="createForm()">
+                     <i class="ri-arrow-right-up-line"></i>
+                     <span>Share Love</span>
+                  </a>
+               </li>
+
+               <li class="nav__item">
+                  <a href="#" class="nav__link" onclick="loadContent('src/pickedfood.html')">
+                     <i class="ri-arrow-right-up-line"></i>
+                     <span>Picked Food</span>
+                  </a>
+               </li>
+
+               <li class="nav__item">
+                  <a href="#" class="nav__link" onclick="createProfileHeaderAndGallery()">
+                     <i class="ri-arrow-right-up-line"></i>
+                     <span>Analytics</span>
+                  </a>
+               </li>
+
+               <li class="nav__item">
+                  <a href="#" class="nav__link" onclick="loadContent('src/contact.html')">
+                     <i class="ri-arrow-right-up-line"></i>
+                     <span>About us</span>
+                  </a>
+               </li>
+
+               <li class="nav__item">
+                  <a href="#" class="nav__link" >
+                     <i class="ri-arrow-right-up-line" onclick="logout()"></i>
+                     <span>Logout</span>
+                  </a>
+               </li>
+
+            </ul>
+
+            <!-- Close button -->
+            <div class="nav__close" id="nav-close">
+               <i class="ri-close-large-line"></i>
+            </div>
+         </div>
+
+         <!-- Toggle button -->
+         <div class="nav__toggle" id="nav-toggle">
+            <i class="ri-menu-line"></i>
+         </div>
+      </nav>
+   </header>
+
+   <!--==================== MAIN ====================-->
+   <main class="main-content" id="main-content">
+   </main>
+
+   <!--=============== MAIN JS ===============-->
+   <script src="assets/js/main.js"></script>
+   <script src="./src/form.js"></script>
+
+   <script>
+    
+     
+
+   </script>

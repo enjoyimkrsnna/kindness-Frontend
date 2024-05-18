@@ -1,23 +1,23 @@
+
+
 const loadLogin = () => {
     const clientId = '703310288937-m5t1ki80ogdfl3i0seuu168bnbk5h8qa.apps.googleusercontent.com';
-    const redirectUri = 'http://localhost:5501/landingpage.html';
+    const redirectUri = 'http://localhost:5501/home.html';
     const scope = 'email profile openid';
- 
-   
+
+
     const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=id_token&scope=${scope}&nonce=123`;
- 
-   
+
+
     window.location.href = authUrl;
 }
- 
+
 const parseTokenFromUrl = () => {
     const urlParams = new URLSearchParams(window.location.hash.substring(1));
     return urlParams.get('id_token');
-  
+
 }
-
-
-const fetchUserInfo = (idToken) => {
+    const fetchUserInfo = (idToken) => {
     const decodedToken = parseJwt(idToken);
     const email = decodedToken.email;
     const name = decodedToken.name;
@@ -27,24 +27,24 @@ const fetchUserInfo = (idToken) => {
     localStorage.setItem('jwttoken',idToken);
     sessionStorage.setItem('email', email);
     sessionStorage.setItem('name', name);
- 
-    const url = `http://localhost:8085/login/auth?email=${encodeURIComponent(email)}`;
- 
+
+    const url = `http://52.16.194.174:8085/login/auth?email=${encodeURIComponent(email)}`;
+
     const requestOptions = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${idToken}` 
+            'Authorization': `Bearer ${idToken}`
         },
         body: JSON.stringify({ email: email })
     };
- 
+
     fetch(url, requestOptions)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-           
+        
             const contentType = response.headers.get('content-type');
             if (contentType && contentType.includes('application/json')) {
                 return response.json(); // Parse JSON response
@@ -60,23 +60,24 @@ const fetchUserInfo = (idToken) => {
                 const userAccount = result.userAccount;
                 localStorage.setItem('userdetails', JSON.stringify(userAccount)); // Store user details as string
                 console.log("user is valid ", userAccount);
+                homepage();
             }
         })
         .catch(error => {
             console.error('Error:', error);
         });
 }
- 
+
 const parseJwt = (token) => {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
- 
+
     return JSON.parse(jsonPayload);
 }
- 
+
 const logout = () => {
     sessionStorage.clear();
     loadLogin();
@@ -87,7 +88,7 @@ const logout = () => {
 function fetchUserData() {
     // Assuming you have the user ID stored in localStorage
     const userDetailsString = localStorage.getItem('userdetails');
-    
+
     // Parse the user details JSON string into an object
     const userDetails = JSON.parse(userDetailsString);
     //console.log(userDetails);
@@ -105,15 +106,15 @@ function fetchUserData() {
     .then(response => response.json())
     .then(data => {
         console.log("user data:",data)
-     
+    
     })
     .catch(error => console.error("Error fetching user data:", error));
 }
 
 
 async function SavePost() {
- 
-    
+
+
     let jwttoken = localStorage.getItem('jwttoken');
 
 
@@ -137,17 +138,17 @@ async function SavePost() {
     .then(response => {
         if (response.ok) {
             console.log('Post saved successfully:');
-            
-        }
         
+        }
+    
     })
     .then(data => {
-         console.log('Post saved successfully:', data);
-       
+        console.log('Post saved successfully:', data);
+    
     })
     .catch(error => {
         console.error('There was a problem saving the post:', error);
-       
+    
     });
 
 }

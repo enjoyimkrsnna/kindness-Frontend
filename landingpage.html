@@ -1,25 +1,43 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>KindnessKattle</title>
+    <link rel="stylesheet" type="text/css" href="./assets/css/landingpage.css">
     <script src="./auth.js"></script>
-</head>
-<body>
-    <button id="loginBtn">Login with Google</button>
-    <button onclick="fetchUserData()">get data</button>
-    <button onclick="SavePost()">Post data</button>
-    <script>
-        document.getElementById('loginBtn').onclick = loadLogin;
+    
+</head> 
 
-        // When landing on the redirectUri, check for the token
-        window.onload = () => {
-            const idToken = parseTokenFromUrl();
-            if (idToken) {
-                fetchUserInfo(idToken);
-            }
-        };
-    </script>
+<body>
+
+    <!-- slider section -->
+    <section class="slider_section position-relative">
+        <div class="kindness-kattle">KindnessKattle</div>
+        <div class="text-overlay">
+            <h1>LET'S SHARE LOVE.</h1>
+            <p>KindnessKettle is a heartwarming platform where generosity meets simplicity. It's your go-to space for connecting through food donations. Imagine it as a virtual kettle, simmering with the warmth of shared kindness. Users effortlessly contribute to the collective pot by sharing surplus meals, linking directly with local charities for quick and convenient pickups. With KindnessKettle, making a difference is as easy as a shared meal – a simple act that ripples into a sea of goodwill, one kettle at a time. Join us in the joy of giving, where every contribution adds to the comforting brew of community care.</p>
+        </div>
+        <!-- <button class="slider-button">Sign up</button> -->
+      
+        <button id="loginBtn" class="slider-button">Login with Google</button>
+    </section>
+    <!-- end slider section -->
+
 </body>
+
+<script>
+    document.getElementById('loginBtn').onclick = loadLogin;
+
+    // When landing on the redirectUri, check for the token
+    window.onload = () => {
+        const idToken = parseTokenFromUrl();
+        if (idToken) {
+            fetchUserInfo(idToken);
+        }
+    };
+</script>
+
 </html>
