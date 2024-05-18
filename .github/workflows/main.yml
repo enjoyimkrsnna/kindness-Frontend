@@ -26,6 +26,7 @@ jobs:
               sudo kill -9 $PID
             fi
             # Remove previous repository
+            rm -rf kindness-Frontend
             # Clone new repository
             git clone https://github.com/enjoyimkrsnna/kindness-Frontend
             # # Install dependencies
