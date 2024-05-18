@@ -52,6 +52,8 @@ const parseTokenFromUrl = () => {
             console.log(result);
             if (!result) {
                 console.log('user is not valid')
+                // toggleRegistrationFormVisibility(true);
+
             } else {
                 const userAccount = result.userAccount;
                 localStorage.setItem('userdetails', JSON.stringify(userAccount)); // Store user details as string
@@ -61,6 +63,8 @@ const parseTokenFromUrl = () => {
         })
         .catch(error => {
             console.error('Error:', error);
+           
+
         });
 }
 

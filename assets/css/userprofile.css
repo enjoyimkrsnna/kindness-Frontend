@@ -28,12 +28,13 @@
 }
 
 .profile-user-name {
-  font-size: 1.6rem; /* Increase font size */
+  font-size: 1rem; /* Increase font size */
 }
 
 .profile-edit-btn {
-  font-size: 1.8rem; /* Increase font size */
-  padding: 10px 20px; /* Increase padding */
+  font-size: 1rem; /* Increase font size */
+  padding: 5px 5px; /* Increase padding */
+  margin-top: 2px;
 }
 
 .profile-stats {
@@ -50,4 +51,64 @@
   text-align: center;
   margin-top: 20px; /* Add margin to separate from profile image */
   font-size: 1.4rem; /* Adjust font size */
+}
+
+/* Edit form overlay styles */
+.edit-form-overlay {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.edit-form-overlay.show {
+  display: flex; /* Show the overlay when toggled */
+}
+
+.edit-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  position: relative; /* Added */
+}
+
+.edit-form input,
+.edit-form textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.edit-form button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Close button styles */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #ccc;
+}
+
+.close-btn:hover {
+  color: #555;
 }
