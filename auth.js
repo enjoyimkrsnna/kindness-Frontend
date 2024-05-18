@@ -1,13 +1,9 @@
-
-
 const loadLogin = () => {
     const clientId = '703310288937-m5t1ki80ogdfl3i0seuu168bnbk5h8qa.apps.googleusercontent.com';
     const redirectUri = 'http://localhost:5501/home.html';
     const scope = 'email profile openid';
 
-
     const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=id_token&scope=${scope}&nonce=123`;
-
 
     window.location.href = authUrl;
 }
@@ -60,7 +56,7 @@ const parseTokenFromUrl = () => {
                 const userAccount = result.userAccount;
                 localStorage.setItem('userdetails', JSON.stringify(userAccount)); // Store user details as string
                 console.log("user is valid ", userAccount);
-                homepage();
+               
             }
         })
         .catch(error => {
@@ -78,9 +74,11 @@ const parseJwt = (token) => {
     return JSON.parse(jsonPayload);
 }
 
-const logout = () => {
+function logout(){
+    console.log('logging out')
     sessionStorage.clear();
-    loadLogin();
+    localStorage.clear();
+    window.location.href = 'landingpage.html';
 }
 
 

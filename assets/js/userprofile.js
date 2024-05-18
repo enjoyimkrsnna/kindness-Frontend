@@ -32,7 +32,6 @@ function createProfileHeaderAndGallery(profileData = {
     const editButton = document.createElement('button'); 
     editButton.className = 'btn profile-edit-btn'; 
     editButton.textContent = 'Edit Profile'; 
-    // Assuming toggleEditForm is defined elsewhere
     editButton.onclick = toggleEditForm; 
     const settingsButton = document.createElement('button');
     settingsButton.className = 'btn profile-settings-btn';
@@ -85,9 +84,7 @@ function createProfileHeaderAndGallery(profileData = {
     mainContent.appendChild(galleryContainer);
 }
 
-
 function toggleEditForm() {
-    // Your implementation for toggling the edit form visibility
     const editFormOverlay = document.querySelector('.edit-form-overlay');
     editFormOverlay.classList.toggle('show');
 }

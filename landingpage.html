@@ -32,12 +32,7 @@
     document.getElementById('loginBtn').onclick = loadLogin;
 
     // When landing on the redirectUri, check for the token
-    window.onload = () => {
-        const idToken = parseTokenFromUrl();
-        if (idToken) {
-            fetchUserInfo(idToken);
-        }
-    };
+   
 </script>
 
 </html>

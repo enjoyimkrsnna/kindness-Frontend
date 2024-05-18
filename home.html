@@ -13,6 +13,7 @@
    <link rel="stylesheet" href="assets/css/userprofile.css">
    <script src="./assets/js/home.js"></script>
    <script src="./assets/js/userprofile.js"></script>
+   <script src="../auth.js"></script>
    
    
 
@@ -63,8 +64,8 @@
                </li>
 
                <li class="nav__item">
-                  <a href="#" class="nav__link" >
-                     <i class="ri-arrow-right-up-line" onclick="logout()"></i>
+                  <a href="#" class="nav__link" onclick="logout()">
+                     <i class="ri-arrow-right-up-line" ></i>
                      <span>Logout</span>
                   </a>
                </li>
@@ -93,7 +94,12 @@
    <script src="./src/form.js"></script>
 
    <script>
-    
+     window.onload = () => {
+        const idToken = parseTokenFromUrl();
+        if (idToken) {
+            fetchUserInfo(idToken);
+        }
+    };
      
 
    </script>

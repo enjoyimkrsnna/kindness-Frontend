@@ -1,67 +1,53 @@
 /* Profile header styles */
 .profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .profile-image {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 20px;
-  }
-  
-  .profile-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .profile-user-settings {
-    margin-bottom: 20px;
-  }
-  
-  .profile-stats {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-  }
-  
-  .profile-stats ul {
-    list-style-type: none;
-  }
-  
-  .profile-bio {
-    text-align: center;
-  }
-  
-  /* Gallery styles */
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-  }
-  
-  .gallery-item {
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .gallery-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-  
-  .gallery-item:hover .gallery-image {
-    transform: scale(1.05);
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-user-settings {
+  margin-bottom: 20px;
+}
+
+.profile-user-name {
+  font-size: 1.6rem; /* Increase font size */
+}
+
+.profile-edit-btn {
+  font-size: 1.8rem; /* Increase font size */
+  padding: 10px 20px; /* Increase padding */
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.profile-stats ul {
+  list-style-type: none;
+}
+
+.profile-bio {
+  text-align: center;
+  margin-top: 20px; /* Add margin to separate from profile image */
+  font-size: 1.4rem; /* Adjust font size */
+}
