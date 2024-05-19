@@ -1,37 +1,98 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KindnessKattle</title>
-    <link rel="stylesheet" type="text/css" href="./assets/css/landingpage.css">
-    <script src="./auth.js"></script>
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    
-</head> 
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<body>
+  
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+  
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 
-    <!-- slider section -->
-    <section class="slider_section position-relative">
-        <div class="kindness-kattle">KindnessKattle</div>
-        <div class="text-overlay">
-            <h1>LET'S SHARE LOVE.</h1>
-            <p>KindnessKettle is a heartwarming platform where generosity meets simplicity. It's your go-to space for connecting through food donations. Imagine it as a virtual kettle, simmering with the warmth of shared kindness. Users effortlessly contribute to the collective pot by sharing surplus meals, linking directly with local charities for quick and convenient pickups. With KindnessKettle, making a difference is as easy as a shared meal – a simple act that ripples into a sea of goodwill, one kettle at a time. Join us in the joy of giving, where every contribution adds to the comforting brew of community care.</p>
-        </div>
-        <!-- <button class="slider-button">Sign up</button> -->
-      
-        <button id="loginBtn" class="slider-button">Login with Google</button>
-    </section>
-    <!-- end slider section -->
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-</body>
+ 
+<script src="./auth.js"></script>
 
-<script>
-    document.getElementById('loginBtn').onclick = loadLogin;
+   <!--=============== CSS ===============-->
+   <link rel="stylesheet" href="assets/css/styles.css">
+   <link rel="stylesheet" href="assets/css/landingpagehome.css">
+   <link rel="stylesheet" href="assets/css/aboutus.css">
+
+   <script src="./assets/js/landingpagehome.js"></script>
+   <script src="./assets/js/aboutus.js"></script>
+
+
+
    
-</script>
 
-</html>
+   <title>Kindnesskettle</title>
+</head>
+<body>
+   
+   <!--==================== HEADER ====================-->
+   <header class="header" id="header">
+      <!--==================== REGISTRATION OVERLAY ====================-->
+
+
+      <nav class="nav container">
+         <h4 style="color: aliceblue;" id="userName"> <span>Welcome to KindnessKettle </span></h4>
+
+         <div class="nav__menu" id="nav-menu">
+            <ul class="nav__list">
+
+                <li class="nav__item">
+                    <a href="#" class="nav__link" onclick="createMainContent()">
+                       <i class="ri-arrow-right-up-line"></i>
+                       <span>Home</span>
+                    </a>
+                 </li>
+               
+               <li class="nav__item">
+                  <a href="#" class="nav__link"  id="loginBtn">
+                     <i class="ri-arrow-right-up-line"></i>
+                     <span>Login</span>
+                  </a>
+               </li>
+
+               <li class="nav__item">
+                  <a href="#" class="nav__link" onclick="createAboutUsPage()">
+                     <i class="ri-arrow-right-up-line"></i>
+                     <span>About us</span>
+                  </a>
+               </li>
+
+
+            </ul>
+
+            <!-- Close button -->
+            <div class="nav__close" id="nav-close">
+               <i class="ri-close-large-line"></i>
+            </div>
+         </div>
+
+         <!-- Toggle button -->
+         <div class="nav__toggle" id="nav-toggle">
+            <i class="ri-menu-line"></i>
+         </div>
+      </nav>
+   </header>
+
+   <!--==================== MAIN ====================-->
+   <main class="main-content" id="main-content">
+
+      
+      
+   </main>
+
+   <!--=============== MAIN JS ===============-->
+   <script src="assets/js/main.js"></script>
+   <script src="./src/form.js"></script>
+
+   <script>
+     document.getElementById('loginBtn').onclick = loadLogin;
+     createMainContent();
+
+   </script>
+

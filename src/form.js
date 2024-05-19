@@ -4,10 +4,7 @@ const userDetails = JSON.parse(userDetailsString);
 let userId = userDetails.userId;
 
 
-
-
 function showError(message, type = 'fail') {
-    console.log("i am error")
     const errorCard = document.getElementById('errorCard');
     errorCard.textContent = message || "i am fail";
     errorCard.classList.add('error-card', type);
@@ -23,16 +20,12 @@ function showError(message, type = 'fail') {
 
 function createForm() {
     
-console.log(userId);
-console.log(jwttoken);
+// console.log(userId);
+// console.log(jwttoken);
   
 
     const parentElement = document.querySelector('.main-content');
     parentElement.innerHTML = '';
-
-   
-
-  
 
     let feedDiv = document.createElement('div');
     feedDiv.classList.add('feed');
@@ -105,13 +98,6 @@ console.log(jwttoken);
             formGroup.appendChild(label);
             formGroup.appendChild(inputElement);
 
-            // if (element.id === 'pincode') {
-            //     const checkPincodeBtn = document.createElement('button');
-            //     checkPincodeBtn.textContent = 'Check Pincode';
-            //     checkPincodeBtn.id = 'checkPincodeBtn';
-            //     checkPincodeBtn.addEventListener('click', ()=>checkPincode(inputElement.value));
-            //     formGroup.appendChild(checkPincodeBtn);
-            // }
 
             if (element.id === 'foodImageUrl') {
                 const foodImagebtn = document.createElement('button');
@@ -142,9 +128,11 @@ console.log(jwttoken);
     savePostBtn.id = 'SavePostbtn';
     savePostBtn.addEventListener('click', () => SavePost(formElements));
 
+    formBody.appendChild(savePostBtn)
+
     formContainer.appendChild(formHeader);
     formContainer.appendChild(formBody);
-    formContainer.appendChild(savePostBtn);
+    // formContainer.appendChild(savePostBtn);
 
     feedDiv.appendChild(formContainer);
     parentElement.appendChild(feedDiv);

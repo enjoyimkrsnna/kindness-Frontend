@@ -21,17 +21,17 @@ async function createPost() {
   const data = await response.json();
   console.log(data);
 
- 
+
 
   data?.map(async (postRespone) => {
     let loginUserId = postRespone.donationPost.user.userId;
-    console.log(loginUserId);
+    // console.log(loginUserId);
 
     const PosttimeAvailable = new Date(postRespone.donationPost.timeAvailable).getTime();
   const now = new Date().getTime();
 
   if (PosttimeAvailable < now) {
-      // Skip expired posts
+      
       return;
   }
 
@@ -84,7 +84,7 @@ async function createPost() {
         pickUpBtn.style.cursor = "not-allowed";
       }
 
-   
+  
     cardHeader.appendChild(userlogoName);
     cardHeader.appendChild(timerBtn);
     cardHeader.appendChild(pickUpBtn);
@@ -130,7 +130,7 @@ async function createPost() {
     LikeData?.map((user) => {
       console.log(user);
       if (userId === user.user.userId) {
-        console.log("user liked");
+        // console.log("user liked");
         likeIcon.className = "bx bxs-heart";
         isLiked = true;
       }
@@ -141,7 +141,7 @@ async function createPost() {
 
     const likeCommentTotal = document.createElement("div");
     likeCommentTotal.className = "likeCommentTotal";
-    likeCommentTotal.innerHTML = `<p><strong>${TotalLike}</strong> Likes</p><p class="showComment">View all <strong>18</strong> Comments</p>`;
+    likeCommentTotal.innerHTML = `<p><strong>${TotalLike}</strong> Likes</p><p class="showComment">View all <strong></strong> Comments</p>`;
 
     const inputBoxComment = document.createElement("div");
     inputBoxComment.className = "InputBoxComment";
@@ -158,7 +158,7 @@ async function createPost() {
     );
     const commentResponse = await commentData.json();
 
-    console.log(commentResponse);
+    // console.log(commentResponse);
 
     const commentIds = []; // Array to store comment IDs
 
@@ -176,7 +176,7 @@ async function createPost() {
                         <p>${comment.comment_content}</p>
                         ${
                           userId === comment.UserID
-                            ? '<button class="deleteCommentBtn">Delete</button>'
+                            ? '<i class="bi bi-trash deleteCommentBtn"></i>'
                             : ""
                         }
                     </div>
@@ -225,34 +225,36 @@ async function createPost() {
     ////////////////////////likepost//////////////
 
     likeButton.addEventListener("click", async function () {
-      console.log("hell liked");
-      isLiked = !isLiked;
-      TotalLike += isLiked ? 1 : -1;
-      likeCommentTotal.innerHTML = `<p><strong>${TotalLike}</strong> Likes</p><p class="showComment">View all <strong>18</strong> Comments</p>`;
-      likeIcon.className = isLiked ? "bx bxs-heart" : "bx bx-heart";
 
+      const previousIsLiked = isLiked; 
+      isLiked = !isLiked; 
+  
       const apiEndpoint = isLiked ? "add" : "delete";
       const method = isLiked ? "POST" : "DELETE";
-
+  
       try {
-        await fetch(
-          `https://kindnesskettle.projects.bbdgrad.com/api/kindnessKettle/like/${apiEndpoint}?userId=${userId}&postId=${postRespone.donationPost.postId}`,
-          {
-            method: method,
-            headers: {
-              Authorization: `Bearer ${jwttoken}`,
-            },
+          const response = await fetch(
+              `https://kindnesskettle.projects.bbdgrad.com/api/kindnessKettle/like/${apiEndpoint}?userId=${userId}&postId=${postRespone.donationPost.postId}`,
+              {
+                  method: method,
+                  headers: {
+                      Authorization: `Bearer ${jwttoken}`,
+                  },
+              }
+          );
+  
+          if (response.ok) { 
+              TotalLike += isLiked ? 1 : -1;
+              likeCommentTotal.innerHTML = `<p><strong>${TotalLike}</strong> Likes</p><p class="showComment">View all <strong></strong> Comments</p>`;
+              likeIcon.className = isLiked ? "bx bxs-heart" : "bx bx-heart";
+          } else {
+              throw new Error('Failed to update like status'); 
           }
-        );
       } catch (error) {
-        console.error("Error updating like status:", error);
-
-        isLiked = !isLiked;
-        TotalLike += isLiked ? -1 : 1;
-        likeCommentTotal.innerHTML = `<p><strong>${TotalLike}</strong> Likes</p><p class="showComment">View all <strong>18</strong> Comments</p>`;
-        likeIcon.className = isLiked ? "bx bxs-heart" : "bx bx-heart";
+          console.error("Error updating like status:", error);
+          isLiked = previousIsLiked; 
       }
-    });
+  });
 
     // Handle adding a new comment
     const sendCommentBtn = postCard.querySelector("#sendCommentBtn");
@@ -287,7 +289,7 @@ async function createPost() {
                           newComment.user_id.lastName
                         }:</p>
                         <p>${newComment.comment_content}</p>
-                        <button class="deleteCommentBtn">Delete</button>
+                        <i class="bi bi-trash deleteCommentBtn"></i>'
                     `;
           commentText.appendChild(commentItem);
           commentInput.value = "";
@@ -404,7 +406,7 @@ async function createPost() {
                 pickedUpByUserId : userId,
                 postId:postRespone.donationPost.postId
 
-              // Add other necessary details here
+              
             }),
           }
         );
@@ -412,7 +414,7 @@ async function createPost() {
         if (!updatePostResponse.ok)
           throw new Error("Failed to update post details");
 
-        // Optionally, update the UI to reflect the successful pickup
+       
         pickUpBtn.innerHTML = '<i class="bx bx-donate-heart">Picked Up</i>';
         pickUpBtn.classList.add("disabled");
         pickUpBtn.style.cursor = "not-allowed";

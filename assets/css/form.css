@@ -1,6 +1,6 @@
   
 .postDetailCard {
-  width: 90%;
+  /* width: 90%; */
   background-color: rgba(255, 255, 255, 0.5);
   padding: 1.5rem;
   border-radius: 1rem;
@@ -27,7 +27,19 @@
   text-align: left;
 }
 
-select, input[type="text"], input[type="file"], input[type="datetime-local"], #button1 {
+select, input[type="text"], input[type="file"], input[type="datetime-local"], button{
+  border: 1px solid #3897f0;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  outline: #3897f0;
+  box-shadow: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#button1 {
   border: 1px solid #3897f0;
   border-radius: 1rem;
   padding: 0.5rem;
