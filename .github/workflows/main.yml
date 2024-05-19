@@ -33,9 +33,15 @@ jobs:
             nohup node server.js > output.log 2>&1 &
 
       - name: Zip and Copy to S3
-        run: |
-          # Zip the kindness-Frontend folder
-          zip -r kindness-Frontend.zip kindness-Frontend
-          # Copy the zip file to S3
-          aws s3 cp kindness-Frontend.zip s3://unique-kindnesskettle-image/Frontend/
+       run: |
+          # Check if the kindness-Frontend directory exists
+          if [ -d "kindness-Frontend" ]; then
+            # Zip the kindness-Frontend folder
+            zip -r kindness-Frontend.zip kindness-Frontend
+            # Copy the zip file to S3
+            aws s3 cp kindness-Frontend.zip s3://unique-kindnesskettle-image/Frontend/
+          else
+            echo "Directory kindness-Frontend does not exist. Skipping zip and copy to S3."
+          fi
+          
          
