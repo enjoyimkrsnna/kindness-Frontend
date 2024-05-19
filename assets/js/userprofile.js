@@ -116,7 +116,7 @@ function createEditForm() {
         </div>
         <div class="form-group">
             <label for="profilePicInput">Profile Picture URL:</label>
-            <input type="file" id="profilePicInput" value="Upload profile">
+            <input type="file" id="profilePicInput" input="Upload profile">
         </div>
         <div class="form-group">
             <label for="bioTextarea">Bio:</label>

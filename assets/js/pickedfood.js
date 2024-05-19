@@ -1,4 +1,4 @@
-async function createPost() {
+async function PickupPost() {
     let jwttoken = localStorage.getItem("jwttoken");
     const userDetailsString = localStorage.getItem("userdetails");
     const userDetails = JSON.parse(userDetailsString);
@@ -10,7 +10,7 @@ async function createPost() {
     postContainer.innerHTML = "";
   
     const response = await fetch(
-      "https://kindnesskettle.projects.bbdgrad.com/api/fetchAllDonationPosts",
+      `https://kindnesskettle.projects.bbdgrad.com/api/getpickup/${userId}`,
       {
         method: "GET",
         headers: {
@@ -53,7 +53,7 @@ async function createPost() {
   
       const pickUpBtn = document.createElement("div");
       pickUpBtn.className = "pickUpbtn";
-      pickUpBtn.innerHTML = '<i class="bx bx-donate-heart">PickUp</i>';
+      pickUpBtn.innerHTML = '<i class="bx bx-donate-heart">In-Process</i>';
   
       if (postRespone.donationPost.foodType.foodId === 1) {
         pickUpBtn.style.backgroundColor = "green";
@@ -61,11 +61,6 @@ async function createPost() {
         pickUpBtn.style.backgroundColor = "red";
       }
   
-      if(postRespone.donationPost.user.userId === userId){
-          pickUpBtn.style.display = "none"
-      }
-  
-      
       cardHeader.appendChild(userlogoName);
       cardHeader.appendChild(timerBtn);
       cardHeader.appendChild(pickUpBtn);

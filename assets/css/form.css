@@ -1,60 +1,76 @@
+  
+.postDetailCard {
+  width: 90%;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
 
-
-/* Form container styles */
-.form-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50px; /* Adjust margin-top to position the form */
+  flex-direction: column;
+  align-items: center; 
 }
 
-/* Form styles */
-.form {
-  width: 70%; /* Set the width of the form */
-  max-width: 600px; /* Limit maximum width */
-  background-color: #f5f5f5; /* Set background color */
-  padding: 20px; /* Add padding */
-  border-radius: 10px; /* Add border radius */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+.postHeader {
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
-/* Form header styles */
-.form-header {
-  text-align: center; /* Align header text to center */
-  margin-bottom: 20px; /* Add bottom margin */
+.postDetailForm {
+  display: flex;
+  flex-direction: column;
 }
 
-/* Form input styles */
-.form-group {
-  margin-bottom: 20px; /* Add bottom margin to form groups */
+#label1 {
+  margin-bottom: 0.5rem;
+  width: 100%;
+  text-align: left;
 }
 
-.form-group label {
-  display: block; /* Display labels as blocks */
-  margin-bottom: 5px; /* Add bottom margin */
-  font-weight: bold; /* Set label font weight */
+select, input[type="text"], input[type="file"], input[type="datetime-local"], #button1 {
+  border: 1px solid #3897f0;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  outline: #3897f0;
+  box-shadow: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%; /* Set input width to 100% */
-  padding: 10px; /* Add padding */
-  border-radius: 5px; /* Add border radius */
-  border: 1px solid #ccc; /* Add border */
+#button1 {
+  background-color: #3897f0;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-/* Form button styles */
-.form-button {
-  background-color: #0ab666; /* Set button background color */
-  color: #fff; /* Set text color */
-  padding: 10px 20px; /* Add padding */
-  border: none; /* Remove border */
-  border-radius: 5px; /* Add border radius */
-  cursor: pointer; /* Add cursor pointer */
-  transition: background-color 0.3s; /* Add transition */
+#button1:hover {
+  background-color: #12171e;
 }
 
-.form-button:hover {
-  background-color: #0b9c59; /* Change background color on hover */
-}
+
+
+/* //////////////////////errorcard///////////// */
+.error-card {
+  position: fixed;
+  top: 50px;
+  right: 10px;
+  padding: 20px 20px;
+  border-radius: 8px;
+  background-color: #860909;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  display: none;
+  }
+  
+  .error-card.success {
+  background-color: #3897f0;
+  color: #ffffff;
+  }
+  
+  .error-card.fail {
+  background-color: #f44336;
+  color: #ffffff;
+  }
