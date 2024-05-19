@@ -33,7 +33,7 @@ jobs:
             nohup node server.js > output.log 2>&1 &
 
       - name: Zip and Copy to S3
-       run: |
+        run: |
           # Check if the kindness-Frontend directory exists
           if [ -d "kindness-Frontend" ]; then
             # Zip the kindness-Frontend folder
@@ -43,5 +43,3 @@ jobs:
           else
             echo "Directory kindness-Frontend does not exist. Skipping zip and copy to S3."
           fi
-          
-         
