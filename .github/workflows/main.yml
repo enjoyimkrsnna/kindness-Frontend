@@ -1,18 +1,18 @@
 name: CI/CD Pipeline
- 
+
 on:
   push:
     branches:
       - main  # Adjust branch name as needed
- 
+
 jobs:
   build:
     runs-on: ubuntu-latest
- 
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
- 
+
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
@@ -29,8 +29,13 @@ jobs:
             rm -rf kindness-Frontend
             # Clone new repository
             git clone https://github.com/enjoyimkrsnna/kindness-Frontend
-            # # Install dependencies
-            # cd /home/ec2-user/kindness-Frontend
-            # npm install
             # Start Node.js server
             nohup node server.js > output.log 2>&1 &
+
+      - name: Zip and Copy to S3
+        run: |
+          # Zip the kindness-Frontend folder
+          zip -r kindness-Frontend.zip kindness-Frontend
+          # Copy the zip file to S3
+          aws s3 cp kindness-Frontend.zip s3://unique-kindnesskettle-image/Frontend/
+         
