@@ -137,6 +137,10 @@ function saveProfileChanges() {
     let userdetails = localStorage.getItem('userdetails');
     userdetails = JSON.parse(userdetails);
 
+    
+    let jwttoken = localStorage.getItem('jwttoken');
+    console.log(jwttoken);
+
     const emailAddress = userdetails.emailAddress; // Assuming you have the user's email address
     const firstName = document.getElementById('firstnameInput').value;
     const lastName = document.getElementById('lastnameInput').value;
@@ -157,7 +161,7 @@ function saveProfileChanges() {
         fetch(`https://kindnesskettle.projects.bbdgrad.com/api/api/users/update/${emailAddress}`, {
             method: 'PUT',
             headers: {
-                'Authorization': `Bearer ${jwttoken}` // Include the token in the Authorization header
+                'Authorization': `Bearer ${jwttoken}` 
             },
             body: formData
         })
