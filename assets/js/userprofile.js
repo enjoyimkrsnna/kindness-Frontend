@@ -108,19 +108,19 @@ function createEditForm() {
         <span class="close-btn" onclick="toggleEditForm()">&times;</span>
         <div class="form-group">
             <label for="firstnameInput">First Name:</label>
-            <input type="text" id="firstnameInput" placeholder="${userdetails.firstName}" required>
+            <input type="text" id="firstnameInput" value="${userdetails.firstName}" required>
         </div>
         <div class="form-group">
             <label for="lastnameInput">Last Name:</label>
-            <input type="text" id="lastnameInput" placeholder="${userdetails.lastName}" required>
+            <input type="text" id="lastnameInput" value="${userdetails.lastName}" required>
         </div>
         <div class="form-group">
             <label for="profilePicInput">Profile Picture URL:</label>
-            <input type="file" id="profilePicInput" placeholder="Upload profile">
+            <input type="file" id="profilePicInput" value="Upload profile">
         </div>
         <div class="form-group">
             <label for="bioTextarea">Bio:</label>
-            <textarea id="bioTextarea" placeholder="${userdetails.profileDescription}"></textarea>
+            <textarea id="bioTextarea" value="${userdetails.profileDescription}"></textarea>
         </div>
         <button onclick="saveProfileChanges()">Save</button>
     `;
