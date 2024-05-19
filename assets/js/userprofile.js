@@ -8,7 +8,7 @@ function createProfileHeaderAndGallery() {
     let jwttoken = localStorage.getItem('jwttoken');
     console.log(jwttoken);
 
-    fetch(`https://52.16.194.174:8085/kindnesskettle/useranalytics/${userId}`, {
+    fetch(`https://kindnesskettle.projects.bbdgrad.com/api/kindnesskettle/useranalytics/${userId}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${jwttoken}`,
@@ -154,7 +154,7 @@ function saveProfileChanges() {
     }
 
    // Make an HTTP request to the backend API
-        fetch(`https://52.16.194.174:8085/api/users/update/${emailAddress}`, {
+        fetch(`https://kindnesskettle.projects.bbdgrad.com/api/api/users/update/${emailAddress}`, {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${jwttoken}` // Include the token in the Authorization header
