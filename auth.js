@@ -1,10 +1,12 @@
 const loadLogin = () => {
     const clientId = '703310288937-m5t1ki80ogdfl3i0seuu168bnbk5h8qa.apps.googleusercontent.com';
     const redirectUri = 'https://kindnesskettle.projects.bbdgrad.com/web/home.html';
-    const scope = 'email profile openid';
+    const scope = encodeURIComponent('email profile openid');
+    const nonce = encodeURIComponent('123');
 
     const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=id_token&scope=${scope}&nonce=123`;
 
+    console.log("Redirecting to:", authUrl);
     window.location.href = authUrl;
 }
 
