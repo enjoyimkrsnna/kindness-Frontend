@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI/CD Pipeline 
 
 on:
   push:
@@ -21,25 +21,43 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
             # Stop existing Node.js server
+            echo "Stopping existing Node.js server if running..."
             PID=$(sudo lsof -t -i:5501)
             if [ ! -z "$PID" ]; then
               sudo kill -9 $PID
+              echo "Stopped server with PID $PID"
+            else
+              echo "No server running on port 5501"
             fi
-            # Remove previous repository
-            rm -rf kindness-Frontend
-            # Clone new repository
-            git clone https://github.com/enjoyimkrsnna/kindness-Frontend
-            # Start Node.js server
-            nohup node server.js > output.log 2>&1 &
 
-      - name: Zip and Copy to S3
-        run: |
-          # Check if the kindness-Frontend directory exists
-          if [ -d "kindness-Frontend" ]; then
-            # Zip the kindness-Frontend folder
-            zip -r kindness-Frontend.zip kindness-Frontend
-            # Copy the zip file to S3
-            aws s3 cp kindness-Frontend.zip s3://unique-kindnesskettle-image/Frontend/
-          else
-            echo "Directory kindness-Frontend does not exist. Skipping zip and copy to S3."
-          fi
+            # Remove previous repository
+            echo "Removing previous repository if exists..."
+            rm -rf kindness-Frontend
+            echo "Previous repository removed."
+
+            # Clone new repository
+            echo "Cloning new repository..."
+            git clone https://github.com/enjoyimkrsnna/kindness-Frontend
+            echo "Repository cloned."
+
+            # Start Node.js server
+            echo "Starting Node.js server..."
+            nohup node server.js > output.log 2>&1 &
+            echo "Node.js server started."
+
+            # Check if the kindness-Frontend directory exists
+            echo "Checking if kindness-Frontend directory exists..."
+            if [ -d "kindness-Frontend" ]; then
+              echo "Directory kindness-Frontend exists."
+              # Zip the kindness-Frontend folder
+              echo "Zipping the kindness-Frontend folder..."
+              zip -r kindness-Frontend.zip kindness-Frontend
+              echo "Kindness-Frontend folder zipped."
+
+              # Copy the zip file to S3
+              echo "Copying the zip file to S3..."
+              aws s3 cp kindness-Frontend.zip s3://unique-kindnesskettle-image/Frontend/
+              echo "Zip file copied to S3."
+            else
+              echo "Directory kindness-Frontend does not exist. Skipping zip and copy to S3."
+            fi

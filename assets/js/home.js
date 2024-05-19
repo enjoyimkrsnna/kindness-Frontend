@@ -399,7 +399,7 @@ async function createPost() {
           console.error("Error updating post status and details:", error);
         }
       });
-  
+
     });
   }
   
