@@ -33,6 +33,9 @@ function createProfileHeaderAndGallery() {
         profileImage.alt = data.userAccount.username;
         profileImageDiv.appendChild(profileImage);
 
+        const profileInfo = document.createElement('div');
+        profileInfo.className = 'profile-info';
+
         const profileUserSettings = document.createElement('div');
         profileUserSettings.className = 'profile-user-settings';
         const profileUserName = document.createElement('h1');
@@ -54,30 +57,73 @@ function createProfileHeaderAndGallery() {
         profileStats.className = 'profile-stats';
         const statsList = document.createElement('ul');
         const donations = document.createElement('li');
-        donations.innerHTML = `<span class="profile-stat-count">${data.totalPosts}</span> Donation`;
+        donations.innerHTML = `<span class="profile-stat-count">${data.totalPosts}</span> <b>Donation</b>`;
         const likes = document.createElement('li');
-        likes.innerHTML = `<span class="profile-stat-count">${data.totalLikes}</span> Likes`;
+        likes.innerHTML = `<span class="profile-stat-count">${data.totalLikes}</span> <b>Likes</b>`;
         statsList.appendChild(donations);
         statsList.appendChild(likes);
         profileStats.appendChild(statsList);
 
         const profileBio = document.createElement('div');
         profileBio.className = 'profile-bio';
-        profileBio.innerHTML = `<p><span class="profile-real-name">${data.userAccount.firstName} ${data.userAccount.lastName}</span><br> ${data.userAccount.profileDescription}</p>`;
+        profileBio.innerHTML = `<p><span class="profile-real-name">${data.userAccount.firstName} ${data.userAccount.lastName}</span><br><b> ${data.userAccount.profileDescription}</b></p>`;
+
+        profileInfo.appendChild(profileUserSettings);
+        profileInfo.appendChild(profileStats);
+        profileInfo.appendChild(profileBio);
 
         profile.appendChild(profileImageDiv);
-        profile.appendChild(profileUserSettings);
-        profile.appendChild(profileStats);
-        profile.appendChild(profileBio);
+        profile.appendChild(profileInfo);
 
         // Append profile content to main content container
         mainContent.innerHTML = '';
         mainContent.appendChild(profile);
+
+        // Create gallery
+        const galleryContainer = document.createElement('div');
+        galleryContainer.className = 'gallery-container';
+
+        // Add images and details of donation posts to the gallery
+        data.donationPosts.forEach(post => {
+            const card = document.createElement('div');
+            card.className = 'card';
+
+            // Create image element
+            const imageElement = document.createElement('img');
+            imageElement.src = post.foodImageUrl;
+            imageElement.alt = 'Donation Image';
+            card.appendChild(imageElement);
+
+            // Create details element
+            const details = document.createElement('div');
+            details.className = 'details';
+            details.innerHTML = `
+                <h2>${post.foodType.foodType}</h2>
+                <p>${post.address.addressLine}</p>
+                <p>${post.timeAvailable}</p>
+            `;
+            card.appendChild(details);
+
+            galleryContainer.appendChild(card);
+        });
+
+        mainContent.appendChild(galleryContainer);
     })
     .catch(error => {
         console.error('Error:', error);
     });
 }
+
+
+
+
+
+
+
+
+
+
+//edit profile form
 
 function toggleEditForm() {
     const editFormOverlay = document.querySelector('.edit-form-overlay');
@@ -179,5 +225,3 @@ function saveProfileChanges() {
         });
 
 }
-
-

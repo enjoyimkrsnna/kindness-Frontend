@@ -1,8 +1,8 @@
 /* Profile header styles */
 .profile {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 10px;
@@ -14,6 +14,7 @@
   height: 150px;
   border-radius: 50%;
   overflow: hidden;
+  margin-right: 20px;
   margin-bottom: 20px;
 }
 
@@ -23,34 +24,60 @@
   object-fit: cover;
 }
 
+.profile-details {
+  flex: 1;
+  min-width: 250px;
+}
+
 .profile-user-settings {
   margin-bottom: 20px;
 }
 
 .profile-user-name {
-  font-size: 1rem; /* Increase font size */
+  font-size: 1.5rem;
+  margin-bottom: 10px;
 }
 
 .profile-edit-btn {
-  font-size: 1rem; /* Increase font size */
-  padding: 5px 5px; /* Increase padding */
-  margin-top: 2px;
+  font-size: 1rem;
+  padding: 5px 8px; /* Adjusted padding */
+  cursor: pointer;
 }
 
 .profile-stats {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
+  flex-wrap: wrap;
   margin-bottom: 20px;
 }
 
 .profile-stats ul {
-  list-style-type: none;
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-stats li {
+  margin-right: 20px;
+}
+
+.profile-stat-label {
+  font-weight: bold; /* Added */
+}
+
+.profile-stat-count {
+  color: #ff6347;
 }
 
 .profile-bio {
-  text-align: center;
-  margin-top: 20px; /* Add margin to separate from profile image */
-  font-size: 1.4rem; /* Adjust font size */
+  font-size: 1rem;
+}
+
+.profile-real-name {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
 }
 
 /* Edit form overlay styles */
@@ -77,10 +104,9 @@
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 300px;
-  position: relative; /* Added */
+  position: relative;
 }
 
-.edit-form input,
 .edit-form textarea {
   width: 100%;
   margin-bottom: 10px;
@@ -111,4 +137,46 @@
 
 .close-btn:hover {
   color: #555;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .profile {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-image {
+    margin-bottom: 20px;
+  }
+
+  .profile-user-settings {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .profile-stats {
+    justify-content: center;
+  }
+}
+
+
+/* Gallery styles */
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 10px; /* Reduced gap between gallery items */
+  padding: 10px; /* Reduced padding around the gallery */
+}
+
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
