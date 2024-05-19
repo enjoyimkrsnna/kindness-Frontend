@@ -1,6 +1,6 @@
 const loadLogin = () => {
     const clientId = '703310288937-m5t1ki80ogdfl3i0seuu168bnbk5h8qa.apps.googleusercontent.com';
-    const redirectUri = 'http://localhost:5501/home.html';
+    const redirectUri = 'https://kindnesskettle.projects.bbdgrad.com/web/home.html';
     const scope = encodeURIComponent('email profile openid');
     const nonce = encodeURIComponent('123');
 
