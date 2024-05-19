@@ -4,7 +4,7 @@ async function createPost() {
         const postContainer = document.querySelector('.main-content');
         postContainer.innerHTML = ''; 
 
-        const response = await fetch('http://52.16.194.174:8085/fetchAllDonationPosts',{   
+        const response = await fetch('https://52.16.194.174:8085/fetchAllDonationPosts',{   
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${jwttoken}` 
@@ -63,7 +63,7 @@ async function createPost() {
 
     
         
-        const LiketResponse = await fetch(`http://52.16.194.174:8085/kindnessKettle/like/get?postId=${postRespone.donationPost.postId}`,
+        const LiketResponse = await fetch(`https://52.16.194.174:8085/kindnessKettle/like/get?postId=${postRespone.donationPost.postId}`,
         {   
             method: 'GET',
             headers: {
@@ -124,7 +124,7 @@ async function createPost() {
     //             "PostId": 36
     //         }
     //     ]
-        const commentData = await fetch(`http://52.16.194.174:8085/getComment/${postRespone.donationPost.postId}`,
+        const commentData = await fetch(`https://52.16.194.174:8085/getComment/${postRespone.donationPost.postId}`,
         {   
             method: 'GET',
             headers: {
@@ -188,7 +188,7 @@ async function createPost() {
             TotalLike += isLiked ? 1 : -1;
             likeCommentTotal.innerHTML = `<p><strong>${TotalLike}</strong> Likes</p><p class="showComment">View all <strong>18</strong> Comments</p>`;
             likeIcon.className = isLiked ? 'bx bxs-heart' : 'bx bx-heart';
-            await fetch(`http://52.16.194.174:8085/kindnessKettle/like/${isLiked ? 'add' : 'delete'}?userId=${user.user.userId}&postId=${postRespone.donationPost.postId}`, {
+            await fetch(`https://52.16.194.174:8085/kindnessKettle/like/${isLiked ? 'add' : 'delete'}?userId=${user.user.userId}&postId=${postRespone.donationPost.postId}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${jwttoken}`

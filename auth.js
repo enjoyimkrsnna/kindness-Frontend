@@ -35,7 +35,7 @@ const fetchUserInfo = (idToken) => {
     sessionStorage.setItem('email', email);
     sessionStorage.setItem('name', name);
 
-    const url = `http://52.16.194.174:8085/login/auth?email=${encodeURIComponent(email)}`;
+    const url = `https://52.16.194.174:8085/login/auth?email=${encodeURIComponent(email)}`;
 
     const requestOptions = {
         method: 'POST',
@@ -116,7 +116,7 @@ function fetchUserData() {
     console.log(jwttoken);
     // console.log(jwttoken)
     // Fetch user data from the provided API
-    fetch(`http://52.16.194.174:8085/kindnesskettle/useranalytics/${userId}`, {
+    fetch(`https://52.16.194.174:8085/kindnesskettle/useranalytics/${userId}`, {
         headers: {
             'Authorization': `Bearer ${jwttoken}`
         }
@@ -136,7 +136,7 @@ async function SavePost() {
     let jwttoken = localStorage.getItem('jwttoken');
 
 
-    fetch('http://52.16.194.174:8085/donationPosts', {
+    fetch('https://52.16.194.174:8085/donationPosts', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -225,7 +225,7 @@ const handleRegistration = () => {
 
    // Send registration data to the server
 
-    fetch('http://52.16.194.174:8085/register', {
+    fetch('https://52.16.194.174:8085/register', {
         method: 'POST',
         body: formData,
         headers: {
