@@ -1,12 +1,3 @@
-let jwttoken = localStorage.getItem('jwttoken');
-console.log(jwttoken);
-
-let userdetails = localStorage.getItem('userdetails');
-if(userdetails){
-    userdetails = JSON.parse(userdetails);
-}
-    
-
 function createProfileHeaderAndGallery() {
     let userdetails = localStorage.getItem('userdetails');
     userdetails = JSON.parse(userdetails);
@@ -14,7 +5,8 @@ function createProfileHeaderAndGallery() {
     const userId = userdetails.userId;
     console.log(userId);
 
-   
+    let jwttoken = localStorage.getItem('jwttoken');
+    console.log(jwttoken);
 
     fetch(`http://52.16.194.174:8085/kindnesskettle/useranalytics/${userId}`, {
         method: 'GET',
@@ -28,7 +20,7 @@ function createProfileHeaderAndGallery() {
         console.log(data);
 
         const mainContent = document.getElementById('main-content');
-      
+        mainContent.innerHTML = '';
 
         // Create profile content
         const profile = document.createElement('div');
@@ -97,6 +89,11 @@ function toggleEditForm() {
 }
 
 function createEditForm() {
+
+    let userdetails = localStorage.getItem('userdetails');
+    if(userdetails){
+        userdetails = JSON.parse(userdetails);
+    }
     const editFormOverlay = document.createElement('div');
     editFormOverlay.className = 'edit-form-overlay';
     editFormOverlay.addEventListener('click', function(event) {

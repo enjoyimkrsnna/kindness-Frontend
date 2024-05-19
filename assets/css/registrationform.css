@@ -1,50 +1,89 @@
+/* Base styles */
 
-.card {
-    background-color: white;
+/* Container */
+.registration-form-container {
+    margin: auto;
+    max-width: 600px;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 400px;
-    width: 100%;
-    max-height: 80vh; /* Limit the height to 80% of the viewport height */
-    overflow-y: auto; /* Add scrollbar if content overflows vertically */
+    border: 1px solid #ccc;
+    border-radius: 10px;
 }
 
-.card-body {
+/* Form */
+.registration-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
-.card-body h2 {
+/* Title */
+.title {
+    text-align: center;
+    font-size: 1.5rem;
     margin-bottom: 20px;
 }
 
-.card-body input {
+/* User details */
+.user-details {
+    margin-bottom: 20px;
+}
+
+/* Input box */
+.input-box {
+    margin-bottom: 15px;
+}
+
+/* Details label */
+.details {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+input[type="file"] {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 5px;
 }
 
-.card-body .btn {
-    padding: 10px 20px;
+/* Buttons */
+.button {
+    text-align: center;
+}
+
+input[type="submit"],
+input[type="button"] {
+    background-color: #0ab666;
+    color: #fff;
+    padding: 10px 0; /* Adjusted padding */
     border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
+    border-radius: 5px;
     cursor: pointer;
+    width: 100%; /* Button width set to 100% */
+    margin-bottom: 10px; /* Added margin bottom for spacing */
 }
 
-.card-body .btn:hover {
-    background-color: #0056b3;
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background-color: #0ab688;
 }
 
-.nav.container {
-    display: none; /* Hide the navigation bar by default */
+/* Responsive styles */
+
+/* For small screens */
+@media screen and (max-width: 600px) {
+    .registration-form-container {
+        width: 90%;
+    }
 }
 
-.nav.container.show {
-    display: block; /* Show the navigation bar when the overlay is displayed */
+/* For medium screens */
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+    .registration-form-container {
+        width: 80%;
+    }
 }

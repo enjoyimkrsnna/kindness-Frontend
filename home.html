@@ -11,10 +11,12 @@
    <link rel="stylesheet" href="assets/css/styles.css">
    <link rel="stylesheet" href="assets/css/form.css">
    <link rel="stylesheet" href="assets/css/userprofile.css">
+   <link rel="stylesheet" href="assets/css/registrationform.css">
 
    <script src="./assets/js/home.js"></script>
    <script src="./assets/js/userprofile.js"></script>
    <script src="../auth.js"></script>
+   
 
    <title>Kindnesskettle</title>
 </head>
@@ -91,6 +93,10 @@
 
    <!--==================== MAIN ====================-->
    <main class="main-content" id="main-content">
+
+      
+      <div class="registration-form-container" id="registration-form-container"></div>
+
    </main>
 
    <!--=============== MAIN JS ===============-->
@@ -103,6 +109,7 @@
         if (idToken) {
             fetchUserInfo(idToken);
         }
+       
     };
      
 
