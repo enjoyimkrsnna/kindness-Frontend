@@ -137,6 +137,8 @@ async function createPost() {
       postAddress.className = "postAddress";
       postAddress.innerHTML = `<p><strong>Address-</strong>${postRespone.donationPost.address.addressLine} ${postRespone.donationPost.address.pincode}</p>`;
 
+      const likeComment = document.createElement("div");
+      likeComment.className = "likeComment";
       const LiketResponse = await fetch(
         `https://kindnesskettle.projects.bbdgrad.com/api/kindnessKettle/like/get?postId=${postRespone.donationPost.postId}`,
         {
@@ -151,24 +153,16 @@ async function createPost() {
 
       let TotalLike = LikeData[0]?.totalLikes || 0;
 
-      let isLiked = false;
-      const likeComment = document.createElement("div");
-      likeComment.className = "likeComment";
-
+      let isLiked = LikeData.some((user) => user.user.userId === userId);
+     
       const likeIcon = document.createElement("i");
-      likeIcon.className = "bx bx-heart";
-      LikeData?.map((user) => {
-        console.log(user);
-        if (userId === user.user.userId) {
-          // console.log("user liked");
-          likeIcon.className = "bx bxs-heart";
-          likeIcon.style.color = "red";
-          isLiked = true;
-        }
-      });
+      likeIcon.className = isLiked ? "fa-solid fa-heart" : "far fa-heart";
+      likeIcon.style.color = isLiked ? "red" : "";
+
       likeIcon.style.cursor = "pointer";
       likeComment.appendChild(likeIcon);
-      likeComment.innerHTML += "";
+
+      // likeComment.innerHTML += "";
 
       const likeCommentTotal = document.createElement("div");
       likeCommentTotal.className = "likeCommentTotal";
@@ -256,11 +250,11 @@ async function createPost() {
 
       likeButton.addEventListener("click", async function () {
         loader.style.display = "block";
-        const previousIsLiked = isLiked;
-        isLiked = !isLiked;
+        // const previousIsLiked = isLiked;
+        // isLiked = !isLiked;
 
-        const apiEndpoint = isLiked ? "add" : "delete";
-        const method = isLiked ? "POST" : "DELETE";
+        const apiEndpoint = isLiked ? "delete" : "add";
+        const method = isLiked ? "DELETE" : "POST";
 
         try {
           const response = await fetch(
@@ -274,16 +268,21 @@ async function createPost() {
           );
 
           if (response.ok) {
+
+            isLiked = !isLiked;
+            
             TotalLike += isLiked ? 1 : -1;
+            likeIcon.className = isLiked ? "fa-solid fa-heart" : "far fa-heart";
+            likeIcon.style.color = isLiked ? "red" : "";
             likeCommentTotal.innerHTML = `<p><strong>${TotalLike}</strong> Likes</p><p class="showComment">View all <strong></strong> Comments</p>`;
-            likeIcon.className = isLiked ? "bx bxs-heart" : "bx bx-heart";
+          
           } else {
             throw new Error("Failed to update like status");
           }
           loader.style.display = "none";
         } catch (error) {
           console.error("Error updating like status:", error);
-          isLiked = previousIsLiked;
+          // isLiked = previousIsLiked;
           loader.style.display = "none";
         }
       });
