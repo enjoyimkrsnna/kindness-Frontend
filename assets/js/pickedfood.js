@@ -9,6 +9,11 @@ async function PickupPost() {
   const postContainer = document.querySelector(".main-content");
   postContainer.innerHTML = "";
 
+    const loader = document.querySelector(".loader");
+  loader.style.display = "block";
+  try {
+    
+  
   const response = await fetch(
     `https://kindnesskettle.projects.bbdgrad.com/api/getpickup/${userId}`,
     {
@@ -18,9 +23,37 @@ async function PickupPost() {
       },
     }
   );
+  
   const data = await response.json();
   console.log(data);
 
+  
+  
+
+  const gallaryHome = document.createElement("div");
+  gallaryHome.className = "gallaryHomeCard";
+
+  const filter = document.createElement("div");
+  filter.className = "filterPost";
+
+  const filterDropdown = document.createElement("select");
+  filterDropdown.id = "filterDropdown";
+  filterDropdown.innerHTML = `
+    <option value="all">All</option>
+    <option value="1">Veg</option>
+    <option value="2">Non-veg</option>
+  `;
+  filter.appendChild(filterDropdown);
+  gallaryHome.appendChild(filter);
+
+  const gallery = document.createElement("div");
+  gallery.className = "gallery";
+  gallaryHome.appendChild(gallery);
+  postContainer.appendChild(gallaryHome);
+
+
+  function renderPosts(data){
+    gallery.innerHTML = "";
   data?.map(async (postRespone) => {
     let loginUserId = postRespone.donationPost.user.userId;
     console.log(loginUserId);
@@ -75,6 +108,12 @@ async function PickupPost() {
     postImg.alt = "me";
 
     postImage.appendChild(postImg);
+
+    const deletePost = document.createElement("button");
+    deletePost.className = "removePickup";
+    deletePost.innerHTML = `<p>Delete</p>`
+
+
 
     const foodType = document.createElement("div");
     foodType.className = "foodtype";
@@ -173,17 +212,19 @@ async function PickupPost() {
 
     postCard.appendChild(cardHeader);
     postCard.appendChild(postImage);
+    postCard.appendChild(deletePost);
     postCard.appendChild(foodType);
     postCard.appendChild(postAddress);
     postCard.appendChild(likeComment);
     postCard.appendChild(likeCommentTotal);
     postCard.appendChild(inputBoxComment);
 
-    postContainer.appendChild(postCard);
+    gallery.appendChild(postCard);
 
     const showCommentButton = postCard.querySelector(".showComment");
     const commentText = postCard.querySelector(".commenttext");
     const commentInputBox = postCard.querySelector(".InputBoxComment");
+    const removePickupbtn = postCard.querySelector(".removePickup");
 
     showCommentButton.addEventListener("click", function () {
       const isHidden =
@@ -196,6 +237,51 @@ async function PickupPost() {
         : "View all Comments";
     });
 
+
+    //////////////////update pickup ////////////////////////
+
+    removePickupbtn.addEventListener("click", async function() {
+
+      try {
+                  const updateStatusResponse = await fetch(
+                    `https://kindnesskettle.projects.bbdgrad.com/api/updateactive/${
+                      postRespone.donationPost.postId
+                    }/status?isPicked=${false}`,
+                    {
+                      method: "PUT",
+                      headers: {
+                        Authorization: `Bearer ${jwttoken}`,
+                      },
+                    }
+                  );
+        
+                  if (!updateStatusResponse.ok)
+                    throw new Error("Failed to update post status");
+        
+                  const updatePostResponse = await fetch(
+                    `https://kindnesskettle.projects.bbdgrad.com/api/pickup?userId=${userId}&postId=${postRespone.donationPost.postId}`,
+                    {
+                      method: "DELETE",
+                      headers: {
+                        Authorization: `Bearer ${jwttoken}`,
+                        "Content-Type": "application/json",
+                      }
+                    }
+                  );
+        
+                  if (!updatePostResponse.ok)
+                    throw new Error("Failed to update post details");
+        
+                  pickUpBtn.innerHTML = '<i class="bx bx-donate-heart">Picked Up</i>';
+                  pickUpBtn.classList.add("disabled");
+                  pickUpBtn.style.cursor = "not-allowed";
+                } catch (error) {
+                  console.error("Error updating post status and details:", error);
+                }
+        
+    } )
+
+    ///////////////////////////////////////////////////////
     const likeButton = postCard.querySelector(".likeComment");
 
     ////////////////////////likepost//////////////
@@ -231,7 +317,7 @@ async function PickupPost() {
           console.error("Error updating like status:", error);
           isLiked = previousIsLiked; 
       }
-  });
+   });
 
     // Handle adding a new comment
     const sendCommentBtn = postCard.querySelector("#sendCommentBtn");
@@ -393,5 +479,32 @@ async function PickupPost() {
       }
     });
 
+    
+
   });
+
 }
+      filterDropdown.addEventListener("change", function () {
+        const selectedValue = filterDropdown.value;
+        let filteredPosts;
+        if (selectedValue === "all") {
+          filteredPosts = data;
+        } else {
+          filteredPosts = data.filter(
+            (post) => post.donationPost.foodType.foodId === parseInt(selectedValue)
+          );
+        }
+        renderPosts(filteredPosts);
+      });
+
+      renderPosts(data);
+
+} catch (error) {
+  loader.style.display = "none";
+    console.log("something went wrong");
+}
+}
+
+
+
+

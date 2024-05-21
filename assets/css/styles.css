@@ -46,7 +46,7 @@ html {
 body {
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
-  background-color: var(--white-color);
+  background-color: rgb(51, 51, 51);
 }
 
 ul {

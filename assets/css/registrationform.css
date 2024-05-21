@@ -3,10 +3,12 @@
 /* Container */
 .registration-form-container {
     margin: auto;
-    max-width: 600px;
+    max-width: 800px;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 10px;
+    background-color: #f9f9f9; /* Light grey background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
 }
 
 /* Form */
@@ -18,17 +20,22 @@
 /* Title */
 .title {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     margin-bottom: 20px;
+    color: #444; /* Darker text color */
 }
 
 /* User details */
 .user-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Space between items */
     margin-bottom: 20px;
 }
 
 /* Input box */
 .input-box {
+    flex: 0 1 calc(50% - 10px); /* Adjust input box width for horizontal alignment */
     margin-bottom: 15px;
 }
 
@@ -36,6 +43,8 @@
 .details {
     display: block;
     margin-bottom: 5px;
+    font-weight: bold;
+    color: #555; /* Medium grey text color */
 }
 
 /* Inputs */
@@ -48,28 +57,37 @@ input[type="file"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #fff; /* White background for inputs */
+}
+
+textarea {
+    resize: vertical; /* Allow vertical resize for textareas */
 }
 
 /* Buttons */
 .button {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 input[type="submit"],
 input[type="button"] {
     background-color: #0ab666;
     color: #fff;
-    padding: 10px 0; /* Adjusted padding */
+    padding: 10px 0;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 100%; /* Button width set to 100% */
-    margin-bottom: 10px; /* Added margin bottom for spacing */
+    width: 100%;
+    max-width: 200px; /* Maximum width for buttons */
+    margin-bottom: 10px;
 }
 
 input[type="submit"]:hover,
 input[type="button"]:hover {
-    background-color: #0ab688;
+    background-color: #099d58;
 }
 
 /* Responsive styles */
@@ -78,6 +96,24 @@ input[type="button"]:hover {
 @media screen and (max-width: 600px) {
     .registration-form-container {
         width: 90%;
+        padding: 10px;
+    }
+
+    .user-details {
+        flex-direction: column; /* Stack input boxes vertically on small screens */
+    }
+
+    .input-box {
+        flex: 0 1 100%;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    input[type="submit"],
+    input[type="button"] {
+        padding: 10px;
     }
 }
 
@@ -85,5 +121,21 @@ input[type="button"]:hover {
 @media screen and (min-width: 601px) and (max-width: 1024px) {
     .registration-form-container {
         width: 80%;
+    }
+
+    .title {
+        font-size: 1.75rem;
+    }
+
+    input[type="submit"],
+    input[type="button"] {
+        padding: 10px;
+    }
+}
+
+/* For large screens */
+@media screen and (min-width: 1025px) {
+    .registration-form-container {
+        width: 70%;
     }
 }

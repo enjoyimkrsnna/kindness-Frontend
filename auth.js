@@ -2,7 +2,6 @@ const loadLogin = () => {
     const clientId = '703310288937-m5t1ki80ogdfl3i0seuu168bnbk5h8qa.apps.googleusercontent.com';
     const redirectUri = 'https://kindnesskettle.projects.bbdgrad.com/web/home.html';
     const scope = encodeURIComponent('email profile openid');
-    const nonce = encodeURIComponent('123');
 
     const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=id_token&scope=${scope}&nonce=123`;
 
@@ -257,6 +256,8 @@ const handleRegistration = () => {
             localStorage.setItem('userdetails', JSON.stringify(userData));
             // Redirect to the home page
             window.location.reload();
+           
+            
             
 
         } else {
@@ -269,8 +270,7 @@ const handleRegistration = () => {
     });
 };
 
-
-
+ 
 const createRegistrationForm = () => {
     const formContainer = document.createElement('div');
     formContainer.classList.add('registration-form-container');
@@ -311,11 +311,6 @@ const createRegistrationForm = () => {
     registerButton.type = 'submit';
     registerButton.value = 'Register';
 
-    const clearButton = document.createElement('input');
-    clearButton.type = 'button';
-    clearButton.value = 'Clear All';
-    clearButton.onclick = clearForm;
-
     const cancelButton = document.createElement('input');
     cancelButton.type = 'button';
     cancelButton.value = 'Cancel';
@@ -323,7 +318,7 @@ const createRegistrationForm = () => {
 
     const buttonContainer = document.createElement('div');
     buttonContainer.classList.add('button');
-    buttonContainer.append(registerButton, cancelButton, clearButton);
+    buttonContainer.append(registerButton, cancelButton);
 
     form.append(title, userDetails, buttonContainer);
 
@@ -373,10 +368,4 @@ const fillTextareaValue = (textareaElement, value) => {
     if (textareaElement && textareaElement.querySelector('textarea')) {
         textareaElement.querySelector('textarea').value = value || '';
     }
-}
-
-// Function to clear the form
-const clearForm = () => {
-    const form = document.getElementById('registration-form');
-    form.reset();
 }
