@@ -96,6 +96,19 @@ function createProfileHeaderAndGallery() {
           const data1 = await response1.json();
           console.log(data1);
 
+          const filter = document.createElement("div");
+          filter.className = "filterPost";
+
+          const filterDropdown = document.createElement("select");
+          filterDropdown.id = "filterDropdown";
+          filterDropdown.innerHTML = `
+            <option value="all">All</option>
+            <option value="1">Veg</option>
+            <option value="2">Non-veg</option>
+          `;
+          filter.appendChild(filterDropdown);
+          galleryContainer.appendChild(filter);
+
         // Add images and details of donation posts to the gallery
         data1.map(async postRespone => {
 

@@ -1,4 +1,18 @@
 async function PickupPost() {
+
+  function showError(message, type = "fail") {
+    const errorCard = document.getElementById("errorCard");
+    errorCard.textContent = message || "i am fail";
+    errorCard.classList.add("error-card", type);
+    errorCard.style.display = "block";
+
+    setTimeout(() => {
+      errorCard.style.display = "none";
+      errorCard.classList.remove("error-card", type);
+    }, 5000);
+  }
+
+
   let jwttoken = localStorage.getItem("jwttoken");
   const userDetailsString = localStorage.getItem("userdetails");
   const userDetails = JSON.parse(userDetailsString);
@@ -24,9 +38,14 @@ async function PickupPost() {
     }
   );
   
+
   const data = await response.json();
   console.log(data);
 
+  loader.style.display = "none";
+
+                  
+  
   
   
 
@@ -51,6 +70,11 @@ async function PickupPost() {
   gallaryHome.appendChild(gallery);
   postContainer.appendChild(gallaryHome);
 
+
+  let errorCard = document.createElement("div");
+  errorCard.classList.add("error-card");
+  errorCard.id = "errorCard";
+  gallaryHome.appendChild(errorCard);
 
   function renderPosts(data){
     gallery.innerHTML = "";
@@ -85,17 +109,23 @@ async function PickupPost() {
     timerBtn.className = "pickUpbtn";
 
     const pickUpBtn = document.createElement("div");
-    pickUpBtn.className = "pickUpbtn";
+    pickUpBtn.className = "pickUpbtn disabled";
     pickUpBtn.innerHTML = '<i class="bx bx-donate-heart">In-Process</i>';
+    pickUpBtn.style.cursor = "not-allowed"
+  
 
     if (postRespone.donationPost.foodType.foodId === 1) {
       pickUpBtn.style.backgroundColor = "green";
     } else {
       pickUpBtn.style.backgroundColor = "red";
     }
+    
+    
+
+    
 
     cardHeader.appendChild(userlogoName);
-    cardHeader.appendChild(timerBtn);
+    // cardHeader.appendChild(timerBtn);
     cardHeader.appendChild(pickUpBtn);
 
     const postImage = document.createElement("div");
@@ -109,9 +139,13 @@ async function PickupPost() {
 
     postImage.appendChild(postImg);
 
+    const FoodExpiryTime = document.createElement("div");
+      FoodExpiryTime.className = "expireTime";
+
     const deletePost = document.createElement("button");
     deletePost.className = "removePickup";
-    deletePost.innerHTML = `<p>Delete</p>`
+    deletePost.innerHTML = `<p>Cancel</p>`
+    // deletePost.style.width = "10%"
 
 
 
@@ -122,6 +156,9 @@ async function PickupPost() {
     const postAddress = document.createElement("div");
     postAddress.className = "postAddress";
     postAddress.innerHTML = `<p><strong>Address-</strong>${postRespone.donationPost.address.addressLine} ${postRespone.donationPost.address.pincode}</p>`;
+
+    const likeComment = document.createElement("div");
+      likeComment.className = "likeComment";
 
     const LiketResponse = await fetch(
       `https://kindnesskettle.projects.bbdgrad.com/api/kindnessKettle/like/get?postId=${postRespone.donationPost.postId}`,
@@ -137,22 +174,16 @@ async function PickupPost() {
 
     let TotalLike = LikeData[0]?.totalLikes || 0;
 
-    let isLiked = false;
-    const likeComment = document.createElement("div");
-    likeComment.className = "likeComment";
+    let isLiked = LikeData.some((user) => user.user.userId === userId);
+     
     const likeIcon = document.createElement("i");
-    likeIcon.className = "bx bx-heart";
-    LikeData?.map((user) => {
-      console.log(user);
-      if (userId === user.user.userId) {
-        console.log("user liked");
-        likeIcon.className = "bx bxs-heart";
-        isLiked = true;
-      }
-    });
+    likeIcon.className = isLiked ? "fa-solid fa-heart" : "far fa-heart";
+    likeIcon.style.color = isLiked ? "red" : "";
+
     likeIcon.style.cursor = "pointer";
     likeComment.appendChild(likeIcon);
-    likeComment.innerHTML += " <i class='bx bx-message-rounded-dots'></i>";
+
+    // likeComment.innerHTML += " <i class='bx bx-message-rounded-dots'></i>";
 
     const likeCommentTotal = document.createElement("div");
     likeCommentTotal.className = "likeCommentTotal";
@@ -213,6 +244,7 @@ async function PickupPost() {
     postCard.appendChild(cardHeader);
     postCard.appendChild(postImage);
     postCard.appendChild(deletePost);
+    postCard.appendChild(FoodExpiryTime);
     postCard.appendChild(foodType);
     postCard.appendChild(postAddress);
     postCard.appendChild(likeComment);
@@ -275,6 +307,8 @@ async function PickupPost() {
                   pickUpBtn.innerHTML = '<i class="bx bx-donate-heart">Picked Up</i>';
                   pickUpBtn.classList.add("disabled");
                   pickUpBtn.style.cursor = "not-allowed";
+                  postCard.remove();
+
                 } catch (error) {
                   console.error("Error updating post status and details:", error);
                 }
@@ -287,13 +321,10 @@ async function PickupPost() {
     ////////////////////////likepost//////////////
 
     likeButton.addEventListener("click", async function () {
-      console.log("hell liked");
   
-      const previousIsLiked = isLiked; 
-      isLiked = !isLiked; 
-  
-      const apiEndpoint = isLiked ? "add" : "delete";
-      const method = isLiked ? "POST" : "DELETE";
+        loader.style.display = "block";
+        const apiEndpoint = isLiked ? "delete" : "add";
+        const method = isLiked ? "DELETE" : "POST";
   
       try {
           const response = await fetch(
@@ -306,16 +337,29 @@ async function PickupPost() {
               }
           );
   
-          if (response.ok) { 
-              TotalLike += isLiked ? 1 : -1;
-              likeCommentTotal.innerHTML = `<p><strong>${TotalLike}</strong> Likes</p><p class="showComment">View all <strong></strong> Comments</p>`;
-              likeIcon.className = isLiked ? "bx bxs-heart" : "bx bx-heart";
+          if (response.ok) {
+
+            isLiked = !isLiked;
+            
+            TotalLike += isLiked ? 1 : -1;
+            likeIcon.className = isLiked ? "fa-solid fa-heart" : "far fa-heart";
+            likeIcon.style.color = isLiked ? "red" : "";
+            likeCommentTotal.innerHTML = `<p><strong>${TotalLike}</strong> Likes</p><p class="showComment">View all <strong></strong> Comments</p>`;
+            
+            if(apiEndpoint==='delete'){
+              showError("Unliked!!!");
+            }else{
+              showError("Liked successfull","success");
+            }
           } else {
-              throw new Error('Failed to update like status'); 
+            throw new Error("Failed to update like status");
+          
           }
+          loader.style.display = "none";
       } catch (error) {
+           showError(error);
           console.error("Error updating like status:", error);
-          isLiked = previousIsLiked; 
+          loader.style.display = "none";
       }
    });
 
@@ -375,6 +419,7 @@ async function PickupPost() {
 
   
     async function deleteComment(commentId, commentElement) {
+      loader.style.display = "block";
       try {
         await fetch(`https://kindnesskettle.projects.bbdgrad.com/api/delete_comments/${commentId}`, {
           method: "DELETE",
@@ -388,7 +433,9 @@ async function PickupPost() {
           commentIds.splice(index, 1); 
         }
         console.log("Deleted Comment ID:", commentId); 
+        loader.style.display = "none";
       } catch (error) {
+        loader.style.display = "none";
         console.error("Error deleting comment:", error);
       }
     }
@@ -416,6 +463,8 @@ async function PickupPost() {
         pickUpBtn.innerHTML =
           '<i class="bx bx-donate-heart">PickUp (Expired)</i>';
         pickUpBtn.style.cursor = "not-allowed";
+        pickUpBtn.style.display = "none";
+        pickUpBtn.style.backgroundColor = "red";
         return;
       }
 
@@ -426,7 +475,17 @@ async function PickupPost() {
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+      if (days >= 6) {
+        FoodExpiryTime.style.backgroundColor = "green";
+        
+      } else if (days < 6 && days >= 1) {
+        FoodExpiryTime.style.backgroundColor = "pink";
+      } else {
+        FoodExpiryTime.style.backgroundColor = "red";
+      }
+
       timerBtn.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      FoodExpiryTime.innerHTML = `<p><strong>Expire-Time</strong> - ${days}d ${hours}h ${minutes}m ${seconds}s</p>`;
 
       setTimeout(updateTimer, 1000);
     }
@@ -435,10 +494,12 @@ async function PickupPost() {
 
 
     pickUpBtn.addEventListener("click", async function () {
-        alert("i am pickup ")
+     
+
       if (pickUpBtn.classList.contains("disabled")) return; 
 
       try {
+        loader.style.display = "block";
         const updateStatusResponse = await fetch(
           `https://kindnesskettle.projects.bbdgrad.com/api/updateactive/${postRespone.donationPost.postId}/status?isPicked=${true}`,
           {
@@ -474,7 +535,9 @@ async function PickupPost() {
         pickUpBtn.innerHTML = '<i class="bx bx-donate-heart">Picked Up</i>';
         pickUpBtn.classList.add("disabled");
         pickUpBtn.style.cursor = "not-allowed";
+        loader.style.display = "none";
       } catch (error) {
+        loader.style.display = "none";
         console.error("Error updating post status and details:", error);
       }
     });

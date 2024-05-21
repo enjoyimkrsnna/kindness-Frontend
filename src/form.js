@@ -83,7 +83,7 @@ function createForm() {
         inputType: "datetime-local",
         id: "timeAvailable",
         name: "timeAvailable",
-        labelText: "Time Available:",
+        labelText: "Expire Time:",
       },
     ];
   

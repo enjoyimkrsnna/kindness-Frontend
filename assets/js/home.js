@@ -6,6 +6,21 @@ async function createPost() {
   console.log(userId);
   console.log(jwttoken);
 
+
+  function showError(message, type = "fail") {
+    const errorCard = document.getElementById("errorCard");
+    errorCard.textContent = message || "i am fail";
+    errorCard.classList.add("error-card", type);
+    errorCard.style.display = "block";
+
+    setTimeout(() => {
+      errorCard.style.display = "none";
+      errorCard.classList.remove("error-card", type);
+    }, 5000);
+  }
+
+
+
   const postContainer = document.querySelector(".main-content");
   postContainer.innerHTML = "";
 
@@ -28,6 +43,8 @@ async function createPost() {
 
   loader.style.display = "none";
 
+  
+
   const gallaryHome = document.createElement("div");
   gallaryHome.className = "gallaryHomeCard";
 
@@ -48,6 +65,11 @@ async function createPost() {
   gallery.className = "gallery";
   gallaryHome.appendChild(gallery);
   postContainer.appendChild(gallaryHome);
+
+  let errorCard = document.createElement("div");
+    errorCard.classList.add("error-card");
+    errorCard.id = "errorCard";
+    gallaryHome.appendChild(errorCard);
 
   function renderPosts(data) {
     gallery.innerHTML = "";
@@ -250,9 +272,6 @@ async function createPost() {
 
       likeButton.addEventListener("click", async function () {
         loader.style.display = "block";
-        // const previousIsLiked = isLiked;
-        // isLiked = !isLiked;
-
         const apiEndpoint = isLiked ? "delete" : "add";
         const method = isLiked ? "DELETE" : "POST";
 
@@ -275,14 +294,18 @@ async function createPost() {
             likeIcon.className = isLiked ? "fa-solid fa-heart" : "far fa-heart";
             likeIcon.style.color = isLiked ? "red" : "";
             likeCommentTotal.innerHTML = `<p><strong>${TotalLike}</strong> Likes</p><p class="showComment">View all <strong></strong> Comments</p>`;
-          
+            if(apiEndpoint==='delete'){
+              showError("Unliked!!!");
+            }else{
+              showError("Liked successfull","success");
+            }
           } else {
             throw new Error("Failed to update like status");
           }
           loader.style.display = "none";
         } catch (error) {
+          showError(error);
           console.error("Error updating like status:", error);
-          // isLiked = previousIsLiked;
           loader.style.display = "none";
         }
       });
@@ -366,9 +389,11 @@ async function createPost() {
           }
           console.log("Deleted Comment ID:", commentId);
           loader.style.display = "none";
+          showError("Comment Deleted Successfully","success");
         } catch (error) {
           console.error("Error deleting comment:", error);
           loader.style.display = "none";
+          showError("Error deleting comment")
         }
       }
 
@@ -426,7 +451,6 @@ async function createPost() {
       updateTimer();
 
       pickUpBtn.addEventListener("click", async function () {
-        alert("i am pickup ");
         if (pickUpBtn.classList.contains("disabled")) return;
 
         try {
@@ -466,7 +490,9 @@ async function createPost() {
           pickUpBtn.innerHTML = '<i class="bx bx-donate-heart">Picked Up</i>';
           pickUpBtn.classList.add("disabled");
           pickUpBtn.style.cursor = "not-allowed";
+          showError("Pickup successfully","success");
         } catch (error) {
+          showError("Error in updating the details");
           console.error("Error updating post status and details:", error);
         }
       });
