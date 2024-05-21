@@ -411,10 +411,10 @@ async function createPost() {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        if (days > 6) {
+        if (days >= 6) {
           FoodExpiryTime.style.backgroundColor = "green";
         } else if (days < 6 && days >= 1) {
-          FoodExpiryTime.style.backgroundColor = "blue";
+          FoodExpiryTime.style.backgroundColor = "pink";
         } else {
           FoodExpiryTime.style.backgroundColor = "red";
         }
