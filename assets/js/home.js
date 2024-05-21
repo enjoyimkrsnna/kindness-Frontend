@@ -255,7 +255,7 @@ async function createPost() {
       ////////////////////////likepost//////////////
 
       likeButton.addEventListener("click", async function () {
-        // loader.style.display = "block";
+        loader.style.display = "block";
         const previousIsLiked = isLiked;
         isLiked = !isLiked;
 
@@ -280,11 +280,11 @@ async function createPost() {
           } else {
             throw new Error("Failed to update like status");
           }
-          // loader.style.display = "none";
+          loader.style.display = "none";
         } catch (error) {
           console.error("Error updating like status:", error);
           isLiked = previousIsLiked;
-          // loader.style.display = "none";
+          loader.style.display = "none";
         }
       });
 
@@ -339,10 +339,10 @@ async function createPost() {
                 const commentId = newComment.comment_id;
                 await deleteComment(commentId, commentItem);
               });
-            // loader.style.display = "none";
+            loader.style.display = "none";
           } catch (error) {
             console.error("Error adding comment:", error);
-            // loader.style.display = "none";
+            loader.style.display = "none";
           }
         }
       });
@@ -366,10 +366,10 @@ async function createPost() {
             commentIds.splice(index, 1);
           }
           console.log("Deleted Comment ID:", commentId);
-          // loader.style.display = "none";
+          loader.style.display = "none";
         } catch (error) {
           console.error("Error deleting comment:", error);
-          // loader.style.display = "none";
+          loader.style.display = "none";
         }
       }
 
@@ -493,7 +493,7 @@ async function createPost() {
 } catch (error) {
 
   console.log("something went wrong");
-  // loader.style.display = "none";
+  loader.style.display = "none";
 }
 }
 
