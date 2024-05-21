@@ -20,7 +20,7 @@ function createForm() {
     // console.log(jwttoken);
   
     const loader = document.querySelector('.loader');
-    loader.style.display = 'block';
+    // loader.style.display = 'block';
   
     const parentElement = document.querySelector(".main-content");
     parentElement.innerHTML = "";
@@ -166,7 +166,7 @@ function createForm() {
     feedDiv.appendChild(formContainer);
     parentElement.appendChild(feedDiv);
   
-    loader.style.display = 'none';
+    // loader.style.display = 'none';
   
     /////////////pincode validation///////////////////////////////////
     let pinValidate = false;
@@ -262,7 +262,7 @@ function createForm() {
         if (!Pincode) {
           return;
         }
-        loader.style.display = 'block'
+        // loader.style.display = 'block'
   
         fetch("https://kindnesskettle.projects.bbdgrad.com/api/donationPosts", {
           method: "POST",
@@ -289,21 +289,21 @@ function createForm() {
               formElements.forEach((element) => {
                 document.getElementById(element.id).value = "";
               });
-              loader.style.display = 'none'
-            }
+            //   loader.style.display = 'none'
+             }
           })
           .then((data) => {
             console.log("Post saved successfully:");
             showError("Post saved successfully", "success");
           })
           .catch((error) => {
-              loader.style.display = 'none'
+            //   loader.style.display = 'none'
             console.error("There was a problem saving the post:", error);
             showError("Something went wrong");
            
           });
       } else {
-          loader.style.display = 'none'
+        //   loader.style.display = 'none'
         showError("Check image is uploaded or not");
         console.log("Image is not uploaded");
         
@@ -317,7 +317,7 @@ function createForm() {
   
     let selectedFileName = "";
     function uploadImage(file) {
-      loader.style.display = 'block'
+    //   loader.style.display = 'block'
       // Create a new FormData object
       const formData = new FormData();
       formData.append("file", file);
@@ -347,14 +347,14 @@ function createForm() {
         })
         .then((data) => {
           console.log("Image uploaded successfully", data);
-          loader.style.display = 'none'
+        //   loader.style.display = 'none'
           showError("Image uploaded successfully", "success");
           selectedFileName = data;
   
         })
         .catch((error) => {
           console.error("Error:", error);
-          loader.style.display = 'none'
+         // loader.style.display = 'none'
           showError("Failed to upload image");
         });
     }

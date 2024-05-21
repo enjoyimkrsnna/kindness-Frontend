@@ -10,7 +10,7 @@ async function PickupPost() {
   postContainer.innerHTML = "";
 
     const loader = document.querySelector(".loader");
-  loader.style.display = "block";
+  // loader.style.display = "block";
   try {
     
   
@@ -500,7 +500,7 @@ async function PickupPost() {
       renderPosts(data);
 
 } catch (error) {
-  loader.style.display = "none";
+  // loader.style.display = "none";
     console.log("something went wrong");
 }
 }
