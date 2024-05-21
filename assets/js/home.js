@@ -10,7 +10,7 @@ async function createPost() {
   postContainer.innerHTML = "";
 
   const loader = document.querySelector(".loader");
-  // loader.style.display = "block";
+  loader.style.display = "block";
   try {
     
  
@@ -26,7 +26,7 @@ async function createPost() {
   const data = await response.json();
   console.log(data);
 
-  // loader.style.display = "none";
+  loader.style.display = "none";
 
   const gallaryHome = document.createElement("div");
   gallaryHome.className = "gallaryHomeCard";
