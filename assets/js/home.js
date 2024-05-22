@@ -430,6 +430,8 @@ async function createPost() {
           pickUpBtn.style.cursor = "not-allowed";
           pickUpBtn.style.display = "none";
           pickUpBtn.style.backgroundColor = "red";
+          FoodExpiryTime.innerHTML = `<p><strong>Expire-Time</strong> Expired</p>`
+
 
           return;
         }

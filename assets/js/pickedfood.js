@@ -1,4 +1,5 @@
 async function PickupPost() {
+ 
 
   function showError(message, type = "fail") {
     const errorCard = document.getElementById("errorCard");
@@ -37,6 +38,19 @@ async function PickupPost() {
       },
     }
   );
+
+  if (!response.ok) {
+    if (response.status === 404) {
+      loader.style.display = "none";
+      const noData = document.createElement("div");
+      noData.className = "nodataMessage";
+      noData.innerHTML = `<h1>Seem's like you didn't pick anything</h1>`;
+      noData.style.color = "white"
+      postContainer.appendChild(noData);
+      return;
+    }
+    throw new Error('Failed to fetch pickup data');
+  }
   
 
   const data = await response.json();
@@ -45,7 +59,10 @@ async function PickupPost() {
   loader.style.display = "none";
 
                   
-  
+const noData = document.createElement("div");
+noData.className="nodataMessage";
+noData.innerHTML = `<p>Seem's like you didn't pick anything</p>`;
+
   
   
 
@@ -75,6 +92,8 @@ async function PickupPost() {
   errorCard.classList.add("error-card");
   errorCard.id = "errorCard";
   gallaryHome.appendChild(errorCard);
+
+  gallaryHome.appendChild(noData);
 
   function renderPosts(data){
     gallery.innerHTML = "";
@@ -394,7 +413,7 @@ async function PickupPost() {
           commentItem.className = "commentItem";
           commentItem.dataset.commentId = newComment.comment_id;
           commentItem.innerHTML = `
-                        <img src="https://i.pinimg.com/474x/17/01/29/170129210e99f5083afbffb6109f6b3d.jpg" alt="User" class="commentUserImg">
+                        <img src=  ${ newComment.donation_post.user.imageUrl} || "https://i.pinimg.com/474x/17/01/29/170129210e99f5083afbffb6109f6b3d.jpg" alt="User" class="commentUserImg">
                         <p class="commentUserName">${
                           newComment.user_id.firstName +
                           " " +
@@ -470,6 +489,7 @@ async function PickupPost() {
         pickUpBtn.style.cursor = "not-allowed";
         pickUpBtn.style.display = "none";
         pickUpBtn.style.backgroundColor = "red";
+        FoodExpiryTime.innerHTML = `<p><strong>Expire-Time</strong> Expired</p>`
         return;
       }
 

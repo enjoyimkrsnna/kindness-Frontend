@@ -5,9 +5,13 @@ function createProfileHeaderAndGallery() {
     const userId = userdetails.userId;
     console.log(userId);
 
+    const loader = document.querySelector(".loader");
+    
+
     let jwttoken = localStorage.getItem('jwttoken');
     console.log(jwttoken);
 
+    loader.style.display = "block";
     fetch(`https://kindnesskettle.projects.bbdgrad.com/api/kindnesskettle/useranalytics/${userId}`, {
         method: 'GET',
         headers: {
@@ -81,9 +85,9 @@ function createProfileHeaderAndGallery() {
 
         // const galleryContainer = document.createElement('div');
         // galleryContainer.className = 'gallery-container';
-        
+        loader.style.display = "none";
 
-
+        loader.style.display = "block"
         const response1 = await fetch(
             `https://kindnesskettle.projects.bbdgrad.com/api/fetchAllDonationPosts`,
             {
@@ -95,6 +99,7 @@ function createProfileHeaderAndGallery() {
           );
           const data1 = await response1.json();
           console.log(data1);
+          loader.style.display = "none"
 
           const gallaryHome = document.createElement("div");
           gallaryHome.className = "gallaryHomeCard";
@@ -104,6 +109,7 @@ function createProfileHeaderAndGallery() {
         
           const filterDropdown = document.createElement("select");
           filterDropdown.id = "filterDropdown";
+          filterDropdown.className = "filter123"
           filterDropdown.innerHTML = `
             <option value="all">All</option>
             <option value="1">Veg</option>
@@ -248,7 +254,7 @@ function createProfileHeaderAndGallery() {
             likeComment.appendChild(likeIcon);
 
             
-            likeComment.innerHTML += " <i class='bx bx-message-rounded-dots'></i>";
+            // likeComment.innerHTML += " <i class='bx bx-message-rounded-dots'></i>";
       
             const likeCommentTotal = document.createElement("div");
             likeCommentTotal.className = "likeCommentTotal";
@@ -282,7 +288,7 @@ function createProfileHeaderAndGallery() {
                             <div class="commentItem" data-comment-id="${
                               comment.CommentID
                             }">
-                                <img src="https://i.pinimg.com/474x/17/01/29/170129210e99f5083afbffb6109f6b3d.jpg" alt="User" class="commentUserImg">
+                                <img src= "https://i.pinimg.com/474x/17/01/29/170129210e99f5083afbffb6109f6b3d.jpg" alt="User" class="commentUserImg">
                                 <p class="commentUserName">${comment.UserName}:</p>
                                 <p>${comment.comment_content}</p>
                                 ${
@@ -339,6 +345,7 @@ function createProfileHeaderAndGallery() {
       ////////////////////////likepost//////////////
 
       likeButton.addEventListener("click", async function () {
+        loader.style.display = "block"
        
         const apiEndpoint = isLiked ? "delete" : "add";
         const method = isLiked ? "DELETE" : "POST";
@@ -370,7 +377,11 @@ function createProfileHeaderAndGallery() {
           }else {
             throw new Error("Failed to update like status");
           }
+
+          loader.style.display = "none"
         } catch (error) {
+          
+             loader.style.display = "none"
             console.error("Error updating like status:", error);
            
         }
@@ -379,6 +390,8 @@ function createProfileHeaderAndGallery() {
       // Handle adding a new comment
       const sendCommentBtn = postCard.querySelector("#sendCommentBtn");
       sendCommentBtn.addEventListener("click", async function () {
+        
+        loader.style.display = "block"
         const commentInput = postCard.querySelector("#commentId");
         const commentContent = commentInput.value.trim();
         if (commentContent) {
@@ -402,7 +415,7 @@ function createProfileHeaderAndGallery() {
             commentItem.className = "commentItem";
             commentItem.dataset.commentId = newComment.comment_id;
             commentItem.innerHTML = `
-                          <img src="https://i.pinimg.com/474x/17/01/29/170129210e99f5083afbffb6109f6b3d.jpg" alt="User" class="commentUserImg">
+                          <img src= ${newComment.donationPost.user.imageUrl} || "https://i.pinimg.com/474x/17/01/29/170129210e99f5083afbffb6109f6b3d.jpg" alt="User" class="commentUserImg">
                           <p class="commentUserName">${
                             newComment.user_id.firstName +
                             " " +
@@ -424,7 +437,9 @@ function createProfileHeaderAndGallery() {
                 const commentId = newComment.comment_id;
                 await deleteComment(commentId, commentItem);
               });
+              loader.style.display = "none"
           } catch (error) {
+            loader.style.display = "none"
             console.error("Error adding comment:", error);
           }
           
@@ -433,6 +448,7 @@ function createProfileHeaderAndGallery() {
 
 
       async function deleteComment(commentId, commentElement) {
+        loader.style.display = "block"
         try {
           await fetch(`https://kindnesskettle.projects.bbdgrad.com/api/delete_comments/${commentId}`, {
             method: "DELETE",
@@ -446,7 +462,9 @@ function createProfileHeaderAndGallery() {
             commentIds.splice(index, 1); 
           }
           console.log("Deleted Comment ID:", commentId); 
+          loader.style.display = "none"
         } catch (error) {
+          loader.style.display = "none"
           console.error("Error deleting comment:", error);
         }
       }
@@ -477,6 +495,7 @@ function createProfileHeaderAndGallery() {
           pickUpBtn.style.cursor = "not-allowed";
           pickUpBtn.style.display = "none";
           pickUpBtn.style.backgroundColor = "red";
+          FoodExpiryTime.innerHTML = `<p><strong>Expire-Time</strong> Expired</p>`
           return;
         }
 
@@ -507,7 +526,7 @@ function createProfileHeaderAndGallery() {
 
      
       pickUpBtn.addEventListener("click", async function () {
-          alert("i am pickup ")
+        loader.style.display = "block"
         if (pickUpBtn.classList.contains("disabled")) return; 
 
         try {
@@ -550,7 +569,9 @@ function createProfileHeaderAndGallery() {
           pickUpBtn.innerHTML = '<i class="bx bx-donate-heart">Picked Up</i>';
           pickUpBtn.classList.add("disabled");
           pickUpBtn.style.cursor = "not-allowed";
+          loader.style.display = "none"
         } catch (error) {
+          loader.style.display = "none"
           console.error("Error updating post status and details:", error);
         }
       });
@@ -687,6 +708,7 @@ function saveProfileChanges() {
             }
         })
         .catch(error => {
+          loader.style.display = "none"
             console.error('Error updating profile:', error);
         });
 
