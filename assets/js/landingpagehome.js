@@ -8,7 +8,7 @@ function createMainContent() {
 
   
     const contentContainer = document.createElement('div');
-    contentContainer.id = 'content-container'; // Assign an ID for styling
+    contentContainer.id = 'content-container'; 
 
 
     const heading = document.createElement('h1');

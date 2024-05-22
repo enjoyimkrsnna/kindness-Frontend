@@ -1,38 +1,36 @@
-/*=============== GOOGLE FONTS ===============*/
+
 @import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500&display=swap");
 
-/*=============== VARIABLES CSS ===============*/
+
 :root {
   --header-height: 3.5rem;
 
-  /*========== Colors ==========*/
-  /*Color mode HSL(hue, saturation, lightness)*/
+ 
   --white-color: hsl(0, 0%, 100%);
   --black-color: hsl(0, 0%, 0%);
 
-  /*========== Font and typography ==========*/
-  /*.5rem = 8px | 1rem = 16px ...*/
+
   --body-font: "Montserrat Alternates", sans-serif;
   --h1-font-size: 1.5rem;
   --normal-font-size: .938rem;
 
-  /*========== Font weight ==========*/
+  
   --font-regular: 400;
   --font-medium: 500;
 
-  /*========== z index ==========*/
+
   --z-tooltip: 10;
   --z-fixed: 100;
 }
 
-/*========== Responsive typography ==========*/
+
 @media screen and (min-width: 1150px) {
   :root {
     --normal-font-size: 1rem;
   }
 }
 
-/*=============== BASE ===============*/
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -57,13 +55,13 @@ a {
   text-decoration: none;
 }
 
-/*=============== REUSABLE CSS CLASSES ===============*/
+
 .container {
   max-width: 1120px;
   margin-inline: 1.5rem;
 }
 
-/*=============== HEADER & NAV ===============*/
+
 .header {
   position: fixed;
   width: 100%;
@@ -94,7 +92,7 @@ a {
   cursor: pointer;
 }
 
-/* Navigation for mobile devices */
+
 @media screen and (max-width: 1150px) {
   .nav__menu {
     position: fixed;
@@ -177,7 +175,7 @@ a {
   transition: width .4s ease-out;
 }
 
-/* Animation link on hover */
+
 .nav__link:hover span {
   margin-left: 2.5rem;
 }
@@ -191,7 +189,7 @@ a {
   width: 100%;
 }
 
-/* Sibling fade animation */
+
 .nav__list:has(.nav__link:hover) .nav__link:not(:hover) {
   opacity: .4;
 }
@@ -216,19 +214,18 @@ a {
   transform: translateY(-.25rem);
 }
 
-/* Show menu */
+
 .show-menu {
   left: 0;
 }
 
-/* Animation link when displaying menu */
+
 .show-menu .nav__item {
   visibility: visible;
   transform: translateX(0);
 }
 
-/*=============== BREAKPOINTS ===============*/
-/* For large devices */
+
 @media screen and (min-width: 1150px) {
   .container {
     margin-inline: auto;
@@ -268,21 +265,20 @@ a {
 
 }
 
-/* Card styles */
-/* Card container styles */
+
 .card-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  padding: 20px; /* Add padding around the card container */
+  padding: 20px; 
   
 }
 
 
 .card {
   width: calc(70% - 20px);
-  max-width: 600px; /* Limiting maximum width */
+  max-width: 600px; 
   border: 1px solid #ccc;
   border-radius: 10px;
   overflow: hidden;
@@ -298,14 +294,14 @@ a {
   padding: 15px;
 }
 
-/* Card header styles */
+
 .card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 5px;
   margin-top: 2px;
-  padding: 0 10px; /* Add padding to the card header */
+  padding: 0 10px; 
 }
 
 .card-header img {
@@ -325,20 +321,20 @@ a {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-right: 15px; /* Add right margin to the pickup button */
+  margin-right: 15px; 
 }
 
 
 .card-header span.username {
-  font-size: 1rem; /* Adjust username font size */
+  font-size: 1rem; 
 }
 
-/* Adjust the size and position of like and comment buttons */
+
 .like-button, .comment-button {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 40px; /* Increase button size */
+  font-size: 40px; 
 }
 
 .actions {
@@ -348,7 +344,7 @@ a {
 
 
 
-/* Responsive styles */
+
 @media screen and (max-width: 768px) {
   .card {
     width: calc(50% - 20px);

@@ -1,53 +1,51 @@
-/* Base styles */
 
-/* Container */
 .registration-form-container {
     margin: auto;
     max-width: 800px;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
-    background-color: #f9f9f9; /* Light grey background */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+    background-color: #f9f9f9; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
-/* Form */
+
 .registration-form {
     display: flex;
     flex-direction: column;
 }
 
-/* Title */
+
 .title {
     text-align: center;
     font-size: 1.75rem;
     margin-bottom: 20px;
-    color: #444; /* Darker text color */
+    color: #444; 
 }
 
-/* User details */
+
 .user-details {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between; /* Space between items */
+    justify-content: space-between; 
     margin-bottom: 20px;
 }
 
-/* Input box */
+
 .input-box {
-    flex: 0 1 calc(50% - 10px); /* Adjust input box width for horizontal alignment */
+    flex: 0 1 calc(50% - 10px); 
     margin-bottom: 15px;
 }
 
-/* Details label */
+
 .details {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #555; /* Medium grey text color */
+    color: #555; 
 }
 
-/* Inputs */
+
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -58,14 +56,14 @@ input[type="file"] {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-    background-color: #fff; /* White background for inputs */
+    background-color: #fff; 
 }
 
 textarea {
-    resize: vertical; /* Allow vertical resize for textareas */
+    resize: vertical;
 }
 
-/* Buttons */
+
 .button {
     display: flex;
     flex-direction: column;
@@ -81,7 +79,7 @@ input[type="button"] {
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
-    max-width: 200px; /* Maximum width for buttons */
+    max-width: 200px; 
     margin-bottom: 10px;
 }
 
@@ -90,9 +88,9 @@ input[type="button"]:hover {
     background-color: #099d58;
 }
 
-/* Responsive styles */
 
-/* For small screens */
+
+
 @media screen and (max-width: 600px) {
     .registration-form-container {
         width: 90%;
@@ -100,7 +98,7 @@ input[type="button"]:hover {
     }
 
     .user-details {
-        flex-direction: column; /* Stack input boxes vertically on small screens */
+        flex-direction: column; 
     }
 
     .input-box {
@@ -117,7 +115,7 @@ input[type="button"]:hover {
     }
 }
 
-/* For medium screens */
+
 @media screen and (min-width: 601px) and (max-width: 1024px) {
     .registration-form-container {
         width: 80%;
@@ -133,7 +131,7 @@ input[type="button"]:hover {
     }
 }
 
-/* For large screens */
+
 @media screen and (min-width: 1025px) {
     .registration-form-container {
         width: 70%;

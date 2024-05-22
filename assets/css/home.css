@@ -7,6 +7,8 @@
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
+  z-index: 40;
+
 }
 
 .cardHeader {
@@ -105,7 +107,7 @@
 }
 
 
-/* commet */
+
 
 .commentInput {
   display: flex;
@@ -170,7 +172,7 @@
 }
 
 
-/* loader */
+
 
 .loader {
   position: fixed;
@@ -185,8 +187,8 @@
 
 .loader:before {
   content: '';
-  border: 4px solid #f3f3f3; /* Light grey */
-  border-top: 4px solid #3498db; /* Blue */
+  border: 4px solid #f3f3f3; 
+  border-top: 4px solid #3498db;
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -204,7 +206,7 @@
 }
 
 
-/* Add this CSS */
+
 .filterPost {
 position: sticky;
 margin-bottom: 20px;
@@ -238,29 +240,25 @@ padding: 10px;
 }
 
 
-/* //comment overlay /// */
 
-
-
-
-/* //overlay comment// */
 
 .post-comment {
-position: fixed;
+/* position: absolute; */
 width: 100%;
 height: 100%;
-background: rgb(245, 241, 241);
-bottom: 0;
-left: 0;
+background: black;
+top: 20px;
+left: 50px;
 border-radius: 4mm;
 display: flex;
 align-items: center;
 justify-content: center;
 flex-direction: column;
-z-index: 1;
+z-index: 30;
 max-height: 0;
-overflow: hidden;
-transition: 0.5s ease-out;
+/* overflow: hidden; */
+/* transition: 0.5s ease-out; */
+/* z-index: 20; */
 }
 
 #comment-btn3 {

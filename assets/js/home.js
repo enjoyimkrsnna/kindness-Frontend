@@ -240,14 +240,20 @@ async function createPost() {
 
       console.log("Loaded Comment IDs:", commentIds);
 
+      // const overlayPostComment = document.createElement("div")
+      // overlayPostComment.class = "post-comment";
+
+
       postCard.appendChild(cardHeader);
       postCard.appendChild(postImage);
       postCard.appendChild(FoodExpiryTime);
       postCard.appendChild(foodType);
       postCard.appendChild(postAddress);
       postCard.appendChild(likeComment);
+      // postCard.appendChild(overlayPostComment);
       postCard.appendChild(likeCommentTotal);
       postCard.appendChild(inputBoxComment);
+     
 
       gallery.appendChild(postCard);
 
@@ -310,7 +316,7 @@ async function createPost() {
         }
       });
 
-      // Handle adding a new comment
+     
       const sendCommentBtn = postCard.querySelector("#sendCommentBtn");
       sendCommentBtn.addEventListener("click", async function () {
         loader.style.display = "block";
@@ -369,7 +375,7 @@ async function createPost() {
         }
       });
 
-      // Handle deleting a comment
+  
       async function deleteComment(commentId, commentElement) {
         loader.style.display = "block";
         try {
@@ -406,7 +412,7 @@ async function createPost() {
         });
       });
 
-      // Timer logic
+   
       const timeAvailable = new Date(
         postRespone.donationPost.timeAvailable
       ).getTime();
@@ -498,7 +504,7 @@ async function createPost() {
       });
     });
   }
-  //  postContainer.appendChild(gallaryHome);
+ 
 
 
   filterDropdown.addEventListener("change", function () {

@@ -32,7 +32,7 @@ function createForm() {
     errorCard.classList.add("error-card");
     errorCard.id = "errorCard";
     feedDiv.appendChild(errorCard);
-    // Create the head div
+  
     let headDiv = document.createElement("div");
     headDiv.classList.add("head");
     feedDiv.appendChild(headDiv);
@@ -138,7 +138,7 @@ function createForm() {
             if (file) {
               uploadImage(file);
             } else {
-              // console.error("No file selected");
+           
               showError('No file selected');
             }
           });
@@ -161,7 +161,7 @@ function createForm() {
   
     formContainer.appendChild(formHeader);
     formContainer.appendChild(formBody);
-    // formContainer.appendChild(savePostBtn);
+  
   
     feedDiv.appendChild(formContainer);
     parentElement.appendChild(feedDiv);
@@ -192,7 +192,7 @@ function createForm() {
           {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${jwttoken}`, // Use the received token
+              Authorization: `Bearer ${jwttoken}`, 
             },
           }
         );
@@ -225,7 +225,7 @@ function createForm() {
         const inputElement = document.getElementById(element.id);
         const value = inputElement.value.trim();
   
-        // Check if the value is empty
+       
         if (!value) {
           showError(`Please fill in the ${element.labelText}`);
           isValid = false;
@@ -318,7 +318,7 @@ function createForm() {
     let selectedFileName = "";
     function uploadImage(file) {
       loader.style.display = 'block'
-      // Create a new FormData object
+     
       const formData = new FormData();
       formData.append("file", file);
   

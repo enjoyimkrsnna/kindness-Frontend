@@ -22,14 +22,14 @@ function createProfileHeaderAndGallery() {
         const mainContent = document.getElementById('main-content');
         mainContent.innerHTML = '';
 
-        // Create profile content
+        
         const profile = document.createElement('div');
         profile.className = 'profile';
 
         const profileImageDiv = document.createElement('div');
         profileImageDiv.className = 'profile-image';
         const profileImage = document.createElement('img');
-        profileImage.src = data.userAccount.imageUrl; // Use imageUrl from API response
+        profileImage.src = data.userAccount.imageUrl; 
         profileImage.alt = data.userAccount.username;
         profileImageDiv.appendChild(profileImage);
 
@@ -40,7 +40,7 @@ function createProfileHeaderAndGallery() {
         profileUserSettings.className = 'profile-user-settings';
         const profileUserName = document.createElement('h1');
         profileUserName.className = 'profile-user-name';
-        profileUserName.textContent = data.userAccount.username; // Use username from API response
+        profileUserName.textContent = data.userAccount.username; 
         const editButton = document.createElement('button'); 
         editButton.className = 'btn profile-edit-btn'; 
         editButton.textContent = 'Edit Profile'; 
@@ -75,11 +75,10 @@ function createProfileHeaderAndGallery() {
         profile.appendChild(profileImageDiv);
         profile.appendChild(profileInfo);
 
-        // Append profile content to main content container
+       
         mainContent.innerHTML = '';
         mainContent.appendChild(profile);
 
-        // Create gallery
         // const galleryContainer = document.createElement('div');
         // galleryContainer.className = 'gallery-container';
         
@@ -217,7 +216,7 @@ function createProfileHeaderAndGallery() {
       
             const likeComment = document.createElement("div");
             likeComment.className = "likeComment";
-            
+
             const LiketResponse = await fetch(
               `https://kindnesskettle.projects.bbdgrad.com/api/kindnessKettle/like/get?postId=${postRespone.donationPost.postId}`,
               {
@@ -265,13 +264,13 @@ function createProfileHeaderAndGallery() {
       
             console.log(commentResponse);
       
-            const commentIds = []; // Array to store comment IDs
+            const commentIds = []; 
       
             inputBoxComment.innerHTML = `
                 <div class="commenttext">
                     ${commentResponse
                       .map((comment) => {
-                        commentIds.push(comment.CommentID); // Store comment ID
+                        commentIds.push(comment.CommentID); 
                         return `
                             <div class="commentItem" data-comment-id="${
                               comment.CommentID
@@ -298,7 +297,7 @@ function createProfileHeaderAndGallery() {
                 </div>
             `;
       
-            console.log("Loaded Comment IDs:", commentIds); // Log loaded comment IDs
+            console.log("Loaded Comment IDs:", commentIds); 
       
             postCard.appendChild(cardHeader);
             postCard.appendChild(postImage);
@@ -333,7 +332,7 @@ function createProfileHeaderAndGallery() {
       ////////////////////////likepost//////////////
 
       likeButton.addEventListener("click", async function () {
-        // loader.style.display = "block";
+       
         const apiEndpoint = isLiked ? "delete" : "add";
         const method = isLiked ? "DELETE" : "POST";
 
@@ -408,10 +407,10 @@ function createProfileHeaderAndGallery() {
             commentText.appendChild(commentItem);
             commentInput.value = "";
 
-            commentIds.push(newComment.comment_id); // Store new comment ID
-            console.log("Added Comment ID:", newComment.comment_id); // Log new comment ID
+            commentIds.push(newComment.comment_id); 
+            console.log("Added Comment ID:", newComment.comment_id); 
 
-            // Add delete event listener to the new comment
+           
             commentItem
               .querySelector(".deleteCommentBtn")
               .addEventListener("click", async function () {
@@ -425,7 +424,7 @@ function createProfileHeaderAndGallery() {
         }
       });
 
-      // Handle deleting a comment
+
       async function deleteComment(commentId, commentElement) {
         try {
           await fetch(`https://kindnesskettle.projects.bbdgrad.com/api/delete_comments/${commentId}`, {
@@ -437,15 +436,15 @@ function createProfileHeaderAndGallery() {
           commentElement.remove();
           const index = commentIds.indexOf(commentId);
           if (index > -1) {
-            commentIds.splice(index, 1); // Remove comment ID from array
+            commentIds.splice(index, 1); 
           }
-          console.log("Deleted Comment ID:", commentId); // Log deleted comment ID
+          console.log("Deleted Comment ID:", commentId); 
         } catch (error) {
           console.error("Error deleting comment:", error);
         }
       }
 
-      // Add delete event listener to existing comments
+      
       const deleteCommentButtons = postCard.querySelectorAll(".deleteCommentBtn");
       deleteCommentButtons.forEach((button) => {
         button.addEventListener("click", async function () {
@@ -454,7 +453,7 @@ function createProfileHeaderAndGallery() {
         });
       });
 
-      // Timer logic
+  
       const timeAvailable = new Date(
         postRespone.donationPost.timeAvailable
       ).getTime();
@@ -499,13 +498,13 @@ function createProfileHeaderAndGallery() {
 
       updateTimer();
 
-      // Add event listener to the "PickUp" button
+     
       pickUpBtn.addEventListener("click", async function () {
           alert("i am pickup ")
-        if (pickUpBtn.classList.contains("disabled")) return; // Do nothing if the button is disabled
+        if (pickUpBtn.classList.contains("disabled")) return; 
 
         try {
-          // Update the post status
+          
           const updateStatusResponse = await fetch(
             `https://kindnesskettle.projects.bbdgrad.com/api/updateactive/${postRespone.donationPost.postId}/status?isPicked=${true}`,
             {
@@ -519,7 +518,7 @@ function createProfileHeaderAndGallery() {
           if (!updateStatusResponse.ok)
             throw new Error("Failed to update post status");
 
-          // Update user details and pickup details
+         
           const updatePostResponse = await fetch(
             `https://kindnesskettle.projects.bbdgrad.com/api/pickup`,
             {
@@ -532,7 +531,7 @@ function createProfileHeaderAndGallery() {
                   pickedUpByUserId : userId,
                   postId:postRespone.donationPost.postId
 
-                // Add other necessary details here
+               
               }),
             }
           );
@@ -540,7 +539,7 @@ function createProfileHeaderAndGallery() {
           if (!updatePostResponse.ok)
             throw new Error("Failed to update post details");
 
-          // Optionally, update the UI to reflect the successful pickup
+
           pickUpBtn.innerHTML = '<i class="bx bx-donate-heart">Picked Up</i>';
           pickUpBtn.classList.add("disabled");
           pickUpBtn.style.cursor = "not-allowed";
@@ -584,7 +583,6 @@ function createProfileHeaderAndGallery() {
 
 
 
-//edit profile form
 
 function toggleEditForm() {
     const editFormOverlay = document.querySelector('.edit-form-overlay');
@@ -648,14 +646,14 @@ function saveProfileChanges() {
     let jwttoken = localStorage.getItem('jwttoken');
     console.log(jwttoken);
 
-    const emailAddress = userdetails.emailAddress; // Assuming you have the user's email address
+    const emailAddress = userdetails.emailAddress; 
     const firstName = document.getElementById('firstnameInput').value;
     const lastName = document.getElementById('lastnameInput').value;
     const profilePicInput = document.getElementById('profilePicInput');
-    const profilePic = profilePicInput.files[0]; // Get the selected profile picture file
+    const profilePic = profilePicInput.files[0]; 
     const bio = document.getElementById('bioTextarea').value;
 
-    // Create a FormData object to send the data as multipart/form-data
+  
     const formData = new FormData();
     formData.append('firstName', firstName);
     formData.append('lastName', lastName);
@@ -675,7 +673,7 @@ function saveProfileChanges() {
         .then(response => {
             if (response.ok) {
                 console.log('Profile updated successfully');
-                toggleEditForm(); // Toggle the edit form after successful update'
+                toggleEditForm(); 
                 createProfileHeaderAndGallery();
             } else {
                 console.error('Failed to update profile');

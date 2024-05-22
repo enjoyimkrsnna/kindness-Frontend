@@ -1,4 +1,4 @@
-/* Profile header styles */
+
 .profile {
   display: flex;
   flex-wrap: wrap;
@@ -40,7 +40,7 @@
 
 .profile-edit-btn {
   font-size: 1rem;
-  padding: 5px 8px; /* Adjusted padding */
+  padding: 5px 8px; 
   cursor: pointer;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .profile-stat-label {
-  font-weight: bold; /* Added */
+  font-weight: bold; 
 }
 
 .profile-stat-count {
@@ -80,9 +80,9 @@
   margin-bottom: 5px;
 }
 
-/* Edit form overlay styles */
+
 .edit-form-overlay {
-  display: none; /* Hidden by default */
+  display: none; 
   position: fixed;
   top: 0;
   left: 0;
@@ -95,7 +95,7 @@
 }
 
 .edit-form-overlay.show {
-  display: flex; /* Show the overlay when toggled */
+  display: flex; 
 }
 
 .edit-form {
@@ -125,7 +125,7 @@
   cursor: pointer;
 }
 
-/* Close button styles */
+
 .close-btn {
   position: absolute;
   top: 10px;
@@ -139,7 +139,7 @@
   color: #555;
 }
 
-/* Responsive styles */
+
 @media (max-width: 768px) {
   .profile {
     flex-direction: column;
@@ -161,7 +161,6 @@
 }
 
 
-/* Gallery styles */
 .gallery-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));

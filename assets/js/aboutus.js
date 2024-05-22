@@ -1,15 +1,15 @@
 function createAboutUsPage() {
-    // Select the main content element
+   
     const mainContent = document.getElementById('main-content');
 
-    // Clear existing content
+ 
     mainContent.innerHTML = '';
 
-    // Create a container div
+   
     const containerDiv = document.createElement('div');
     containerDiv.classList.add('responsive-container-block', 'bigContainer');
 
-    // Create Kindness Kettle description
+ 
     const aboutUsDescription = `
 
     <div class="about-section">
