@@ -119,6 +119,13 @@ function createProfileHeaderAndGallery() {
 
         function UserdataPost(data1){
           gallery.innerHTML = "";
+          if (data1.length === 0) {
+              const noPostsMessage = document.createElement("p");
+              noPostsMessage.textContent = "No posts available";
+              gallery.appendChild(noPostsMessage);
+              return;
+          }
+
         data1.map(async postRespone => {
 
             if(postRespone.donationPost.user.userId === userId){
