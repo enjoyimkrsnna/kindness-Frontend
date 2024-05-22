@@ -74,6 +74,7 @@ const fetchUserInfo = (idToken) => {
                 console.log("user is valid ", userAccount);
                 toggleRegistrationFormVisibility(false);
                 toggleNavVisibility(true);
+                createPost();
                
             }
         })
