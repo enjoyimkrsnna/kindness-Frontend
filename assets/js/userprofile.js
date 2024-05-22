@@ -80,8 +80,9 @@ function createProfileHeaderAndGallery() {
         mainContent.appendChild(profile);
 
         // Create gallery
-        const galleryContainer = document.createElement('div');
-        galleryContainer.className = 'gallery-container';
+        // const galleryContainer = document.createElement('div');
+        // galleryContainer.className = 'gallery-container';
+        
 
 
         const response1 = await fetch(
@@ -96,9 +97,12 @@ function createProfileHeaderAndGallery() {
           const data1 = await response1.json();
           console.log(data1);
 
+          const gallaryHome = document.createElement("div");
+          gallaryHome.className = "gallaryHomeCard";
+        
           const filter = document.createElement("div");
           filter.className = "filterPost";
-
+        
           const filterDropdown = document.createElement("select");
           filterDropdown.id = "filterDropdown";
           filterDropdown.innerHTML = `
@@ -107,9 +111,15 @@ function createProfileHeaderAndGallery() {
             <option value="2">Non-veg</option>
           `;
           filter.appendChild(filterDropdown);
-          galleryContainer.appendChild(filter);
+          gallaryHome.appendChild(filter);
+        
+          const gallery = document.createElement("div");
+          gallery.className = "gallery";
+          gallaryHome.appendChild(gallery);
+          mainContent.appendChild(gallaryHome);
 
-        // Add images and details of donation posts to the gallery
+        function UserdataPost(data1){
+          gallery.innerHTML = "";
         data1.map(async postRespone => {
 
             if(postRespone.donationPost.user.userId === userId){
@@ -180,7 +190,7 @@ function createProfileHeaderAndGallery() {
       
           
             cardHeader.appendChild(userlogoName);
-            cardHeader.appendChild(timerBtn);
+            // cardHeader.appendChild(timerBtn);
             cardHeader.appendChild(pickUpBtn);
       
             const postImage = document.createElement("div");
@@ -193,6 +203,9 @@ function createProfileHeaderAndGallery() {
             postImg.alt = "me";
       
             postImage.appendChild(postImg);
+
+            const FoodExpiryTime = document.createElement("div");
+            FoodExpiryTime.className = "expireTime";
       
             const foodType = document.createElement("div");
             foodType.className = "foodtype";
@@ -202,6 +215,9 @@ function createProfileHeaderAndGallery() {
             postAddress.className = "postAddress";
             postAddress.innerHTML = `<p><strong>Address-</strong>${postRespone.donationPost.address.addressLine} ${postRespone.donationPost.address.pincode}</p>`;
       
+            const likeComment = document.createElement("div");
+            likeComment.className = "likeComment";
+            
             const LiketResponse = await fetch(
               `https://kindnesskettle.projects.bbdgrad.com/api/kindnessKettle/like/get?postId=${postRespone.donationPost.postId}`,
               {
@@ -215,22 +231,17 @@ function createProfileHeaderAndGallery() {
             console.log(LikeData);
       
             let TotalLike = LikeData[0]?.totalLikes || 0;
-      
-            let isLiked = false;
-            const likeComment = document.createElement("div");
-            likeComment.className = "likeComment";
+
+            let isLiked = LikeData.some((user) => user.user.userId === userId);
+          
             const likeIcon = document.createElement("i");
-            likeIcon.className = "bx bx-heart";
-            LikeData?.map((user) => {
-              console.log(user);
-              if (userId === user.user.userId) {
-                console.log("user liked");
-                likeIcon.className = "bx bxs-heart";
-                isLiked = true;
-              }
-            });
+            likeIcon.className = isLiked ? "fa-solid fa-heart" : "far fa-heart";
+            likeIcon.style.color = isLiked ? "red" : "";
+
             likeIcon.style.cursor = "pointer";
             likeComment.appendChild(likeIcon);
+
+            
             likeComment.innerHTML += " <i class='bx bx-message-rounded-dots'></i>";
       
             const likeCommentTotal = document.createElement("div");
@@ -291,6 +302,7 @@ function createProfileHeaderAndGallery() {
       
             postCard.appendChild(cardHeader);
             postCard.appendChild(postImage);
+            postCard.appendChild(FoodExpiryTime);
             postCard.appendChild(foodType);
             postCard.appendChild(postAddress);
             postCard.appendChild(likeComment);
@@ -299,7 +311,7 @@ function createProfileHeaderAndGallery() {
       
             // postCard.appendChild(cardHeader);
 
-            galleryContainer.appendChild(postCard);
+            gallery.appendChild(postCard);
 
             const showCommentButton = postCard.querySelector(".showComment");
       const commentText = postCard.querySelector(".commenttext");
@@ -321,35 +333,40 @@ function createProfileHeaderAndGallery() {
       ////////////////////////likepost//////////////
 
       likeButton.addEventListener("click", async function () {
-        console.log("hell liked");
-    
-        const previousIsLiked = isLiked; 
-        isLiked = !isLiked; 
-    
-        const apiEndpoint = isLiked ? "add" : "delete";
-        const method = isLiked ? "POST" : "DELETE";
-    
+        // loader.style.display = "block";
+        const apiEndpoint = isLiked ? "delete" : "add";
+        const method = isLiked ? "DELETE" : "POST";
+
         try {
-            const response = await fetch(
-                `https://kindnesskettle.projects.bbdgrad.com/api/kindnessKettle/like/${apiEndpoint}?userId=${userId}&postId=${postRespone.donationPost.postId}`,
-                {
-                    method: method,
-                    headers: {
-                        Authorization: `Bearer ${jwttoken}`,
-                    },
-                }
-            );
-    
-            if (response.ok) { 
-                TotalLike += isLiked ? 1 : -1;
-                likeCommentTotal.innerHTML = `<p><strong>${TotalLike}</strong> Likes</p><p class="showComment">View all <strong></strong> Comments</p>`;
-                likeIcon.className = isLiked ? "bx bxs-heart" : "bx bx-heart";
-            } else {
-                throw new Error('Failed to update like status'); 
+          const response = await fetch(
+            `https://kindnesskettle.projects.bbdgrad.com/api/kindnessKettle/like/${apiEndpoint}?userId=${userId}&postId=${postRespone.donationPost.postId}`,
+            {
+              method: method,
+              headers: {
+                Authorization: `Bearer ${jwttoken}`,
+              },
             }
+          );
+
+          if (response.ok) {
+
+            isLiked = !isLiked;
+            
+            TotalLike += isLiked ? 1 : -1;
+            likeIcon.className = isLiked ? "fa-solid fa-heart" : "far fa-heart";
+            likeIcon.style.color = isLiked ? "red" : "";
+            likeCommentTotal.innerHTML = `<p><strong>${TotalLike}</strong> Likes</p><p class="showComment">View all <strong></strong> Comments</p>`;
+            if(apiEndpoint==='delete'){
+              showError("Unliked!!!");
+            }else{
+              showError("Liked successfull","success");
+            }
+          }else {
+            throw new Error("Failed to update like status");
+          }
         } catch (error) {
             console.error("Error updating like status:", error);
-            isLiked = previousIsLiked; 
+           
         }
     });
 
@@ -464,7 +481,18 @@ function createProfileHeaderAndGallery() {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+        if (days >= 6) {
+          FoodExpiryTime.style.backgroundColor = "green";
+        } else if (days < 6 && days >= 1) {
+          FoodExpiryTime.style.backgroundColor = "pink";
+        } else {
+          FoodExpiryTime.style.backgroundColor = "red";
+        }
         timerBtn.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        FoodExpiryTime.innerHTML = `<p><strong>Expire-Time</strong> - ${days}d ${hours}h ${minutes}m ${seconds}s</p>`;
+
+  
+        // timerBtn.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
 
         setTimeout(updateTimer, 1000);
       }
@@ -522,8 +550,25 @@ function createProfileHeaderAndGallery() {
       });
     }
         });
-
+        gallaryHome.appendChild(gallery);
         mainContent.appendChild(galleryContainer);
+      }
+
+      filterDropdown.addEventListener("change", function () {
+        const selectedValue = filterDropdown.value;
+        let filteredPosts;
+        if (selectedValue === "all") {
+          filteredPosts = data1;
+        } else {
+          filteredPosts = data1.filter(
+            (post) => post.donationPost.foodType.foodId === parseInt(selectedValue)
+          );
+        }
+        UserdataPost(filteredPosts);
+      });
+      UserdataPost(data1)
+
+        
     })
     .catch(error => {
         console.error('Error:', error);
