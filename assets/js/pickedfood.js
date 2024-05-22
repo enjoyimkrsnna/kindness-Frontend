@@ -273,6 +273,7 @@ async function PickupPost() {
     //////////////////update pickup ////////////////////////
 
     removePickupbtn.addEventListener("click", async function() {
+      loader.style.display = "block";
 
       try {
                   const updateStatusResponse = await fetch(
@@ -308,9 +309,13 @@ async function PickupPost() {
                   pickUpBtn.classList.add("disabled");
                   pickUpBtn.style.cursor = "not-allowed";
                   postCard.remove();
+                  loader.style.display = "none";
+                  showError("Cancel Pickup successfully");
 
                 } catch (error) {
+                  loader.style.display = "none";
                   console.error("Error updating post status and details:", error);
+                  showError("Something went Wrong")
                 }
         
     } )
