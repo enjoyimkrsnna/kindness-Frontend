@@ -121,7 +121,7 @@ function createProfileHeaderAndGallery() {
           gallery.innerHTML = "";
           if (data1.length === 0) {
               const noPostsMessage = document.createElement("p");
-              noPostsMessage.textContent = "No posts available";
+              noPostsMessage.textContent = "Seems Like you didn't not posted anything yet";
               gallery.appendChild(noPostsMessage);
               return;
           }
