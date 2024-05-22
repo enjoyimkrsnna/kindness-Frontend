@@ -51,7 +51,7 @@ function createProfileHeaderAndGallery() {
         settingsButton.innerHTML = '<i class="fas fa-cog" aria-hidden="true"></i>';
         profileUserSettings.appendChild(profileUserName);
         profileUserSettings.appendChild(editButton); 
-        profileUserSettings.appendChild(settingsButton);
+        // profileUserSettings.appendChild(settingsButton);
 
         const profileStats = document.createElement('div');
         profileStats.className = 'profile-stats';
