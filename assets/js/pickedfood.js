@@ -93,10 +93,11 @@ noData.innerHTML = `<p>Seem's like you didn't pick anything</p>`;
   errorCard.id = "errorCard";
   gallaryHome.appendChild(errorCard);
 
-  gallaryHome.appendChild(noData);
+  // gallaryHome.appendChild(noData);
 
   function renderPosts(data){
     gallery.innerHTML = "";
+    
   data?.map(async (postRespone) => {
     let loginUserId = postRespone.donationPost.user.userId;
     console.log(loginUserId);
