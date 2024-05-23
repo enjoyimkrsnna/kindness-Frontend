@@ -333,3 +333,7 @@ background: transparent;
 #comment1:checked ~ .post-comment1 {
 max-height: 650px;
 }
+.removePickup{
+
+margin-top: 1rem;
+}
